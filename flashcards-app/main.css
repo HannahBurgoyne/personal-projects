@@ -2,9 +2,28 @@
   background-color: rgb(222, 253, 253);
 }
 
-.flashcard-design {
-  border: solid 5px black;
-  height: 300px;
-  width: 100px;
+p {
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 30px;
   background-color: pink;
+  text-align: center;
+}
+
+#parent-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 10%;
+}
+
+.flashcard-design {
+  border: solid 2px black;
+  border-radius: 15%;
+  box-shadow: 5px 5px;
+  height: 270px;
+  width: 180px;
+  background-color: pink;
+  padding: 5px;
+  line-height: 150px;
 }
