@@ -3,12 +3,16 @@
 }
 
 h1,
-p {
+p,
+a {
+  display: block;
   font-family: sans-serif;
   font-weight: bold;
   font-size: 30px;
+  color: black;
   background: none !important;
   text-align: center;
+  text-decoration: none;
 }
 
 #parent-container {
@@ -28,7 +32,7 @@ p {
   width: 180px;
   background-color: pink;
   padding: 5px;
-  line-height: 150px;
+  line-height: 220px;
 }
 
 .flashcard-design:hover {
