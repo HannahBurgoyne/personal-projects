@@ -1,3 +1,5 @@
+console.log('Welcome to Flashcards!')
+
 // ---- Sprint goals ---- //
 //
 
@@ -29,7 +31,20 @@ function randomizeCards(deck) {
   return shuffledDeck
 }
 
-console.log(randomizeCards(frenchVocab))
+console.log(randomizeCards(dogTricks))
+
+// loop through array of flashcards, one by one
+function cycleThroughDeck(deck) {
+  deck = randomizeCards(frenchVocab)
+
+  // loop through cards one by one
+
+  deck.forEach((card) => {
+    // grab flashcard html div and add text content from array data
+  })
+  // on click, flip from q to a
+  // on rightclick, move to next card (disable context menu)
+}
 
 // Do images or text content
 // On user click, flip flashcard around (animate module?)
