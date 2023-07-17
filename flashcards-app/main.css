@@ -2,11 +2,12 @@
   background-color: rgb(222, 253, 253);
 }
 
+h1,
 p {
   font-family: sans-serif;
   font-weight: bold;
   font-size: 30px;
-  background-color: pink;
+  background: none !important;
   text-align: center;
 }
 
@@ -15,8 +16,10 @@ p {
   align-items: center;
   justify-content: space-evenly;
   margin: 10%;
+  padding: 2%;
 }
 
+/* Figure out how to create a stacked cards look for the homepage ones */
 .flashcard-design {
   border: solid 2px black;
   border-radius: 15%;
@@ -26,4 +29,14 @@ p {
   background-color: pink;
   padding: 5px;
   line-height: 150px;
+}
+
+.flashcard-design:hover {
+  background-color: rgb(254, 231, 235);
+}
+
+/* Figure out how to make card shift diagonally downwards */
+.flashcard-design:active {
+  transform: translateY(10px);
+  /* transform: translateZ(-9px); */
 }
