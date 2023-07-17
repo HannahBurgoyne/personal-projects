@@ -1,7 +1,8 @@
 // ---- Sprint goals ---- //
 //
 
-// Starting topics //
+// Pre-determined set of flashcard topics (start with 1)
+// Starting decks //
 let frenchVocab = [
   { q: 'dog', a: 'un chien' },
   { q: 'cat', a: 'un chat' },
@@ -19,9 +20,20 @@ let dogTricks = [
 ]
 
 // Flashcards shown in random order to user
+
+function randomizeCards(deck) {
+  let shuffledDeck = deck.sort(function () {
+    return Math.random() - 0.5
+  })
+
+  return shuffledDeck
+}
+
+console.log(randomizeCards(frenchVocab))
+
 // Do images or text content
 // On user click, flip flashcard around (animate module?)
-// Pre-determined set of flashcard topics (start with 1)
+
 // Progress bar along bottom of screen
 // User can tick yes or no on each card to rate their progress
 // Score shown at end to user
