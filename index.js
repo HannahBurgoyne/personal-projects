@@ -31,21 +31,34 @@ function randomizeCards(deck) {
   return shuffledDeck
 }
 
-console.log(randomizeCards(dogTricks))
+//console.log(randomizeCards(dogTricks))
 
 // loop through array of flashcards, one by one
 function cycleThroughDeck(deck) {
   deck = randomizeCards(frenchVocab)
+  console.log(deck)
 
   // loop through cards one by one
 
   deck.forEach((card) => {
     // grab flashcard html div and add text content from array data
+    // how to make text content equal object data?
+    let cardContent = document.getElementById('card-content')
+    cardContent.textContent = 'hello'
+    // flip card on click
+    let activeCard = document.getElementById('active-flashcard')
+    activeCard.addEventListener('click', flipCard)
+
+    function flipCard() {
+      activeCard.classList.toggle('flip-card')
+    }
   })
+
   // on click, flip from q to a
   // on rightclick, move to next card (disable context menu)
 }
 
+cycleThroughDeck(frenchVocab)
 // Do images or text content
 // On user click, flip flashcard around (animate module?)
 
