@@ -40,11 +40,12 @@ function cycleThroughDeck(deck) {
 
   // loop through cards one by one
 
-  deck.forEach((card) => {
+  for (const card of deck) {
     // grab flashcard html div and add text content from array data
     // how to make text content equal object data?
     let cardContent = document.getElementById('card-content')
-    cardContent.textContent = 'hello'
+    cardContent.innerHTML = card.q
+    console.log(card.q)
     // flip card on click
     let activeCard = document.getElementById('active-flashcard')
     activeCard.addEventListener('click', flipCard)
@@ -52,7 +53,7 @@ function cycleThroughDeck(deck) {
     function flipCard() {
       activeCard.classList.toggle('flip-card')
     }
-  })
+  }
 
   // on click, flip from q to a
   // on rightclick, move to next card (disable context menu)
