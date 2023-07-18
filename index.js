@@ -21,6 +21,8 @@ let dogTricks = [
   { q: 'weave', a: "dog weaves through owner's legs" },
 ]
 
+let counter = 0
+let activeCard = document.getElementById('active-flashcard')
 // Flashcards shown in random order to user
 
 function randomizeCards(deck) {
@@ -36,30 +38,44 @@ function randomizeCards(deck) {
 // loop through array of flashcards, one by one
 function cycleThroughDeck(deck) {
   deck = randomizeCards(frenchVocab)
-  console.log(deck)
 
-  // loop through cards one by one
+  for (i = 0; i < deck.length; i++) {
+    activeCard[i].ondblclick = nextCard
 
-  for (const card of deck) {
-    // grab flashcard html div and add text content from array data
-    // how to make text content equal object data?
-    let cardContent = document.getElementById('card-content')
-    cardContent.innerHTML = card.q
-    console.log(card.q)
-    // flip card on click
-    let activeCard = document.getElementById('active-flashcard')
-    activeCard.addEventListener('click', flipCard)
+    function nextCard(deck) {
+      deck = randomizeCards(frenchVocab)
+      if (counter < deck.length) {
+        counter += 1
+        activeCard.innerHTML = deck[counter - 1]
+        if (counter >= 4) {
+          counter = 0
+        }
+      }
+    }
 
-    function flipCard() {
-      activeCard.classList.toggle('flip-card')
+    // loop through cards one by one
+
+    for (const card of deck) {
+      // show back of card with question
+      let cardContent = document.getElementById('card-content')
+      cardContent.innerHTML = card.q
+      // flip card on click to show face of card with answer
+
+      activeCard.addEventListener('click', flipCard)
+
+      function flipCard() {
+        //activeCard.classList.toggle('flip-card')
+        cardContent.innerHTML = card.a
+      }
     }
   }
-
-  // on click, flip from q to a
-  // on rightclick, move to next card (disable context menu)
 }
 
+// on click, flip from q to a
+// on rightclick, move to next card (disable context menu)
+
 cycleThroughDeck(frenchVocab)
+
 // Do images or text content
 // On user click, flip flashcard around (animate module?)
 
