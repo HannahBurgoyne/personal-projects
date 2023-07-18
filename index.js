@@ -22,7 +22,9 @@ let dogTricks = [
 ]
 
 let counter = 0
+console.log(counter)
 let activeCard = document.getElementById('active-flashcard')
+let cardContent = document.getElementById('card-content')
 // Flashcards shown in random order to user
 
 function randomizeCards(deck) {
@@ -36,45 +38,51 @@ function randomizeCards(deck) {
 //console.log(randomizeCards(dogTricks))
 
 // loop through array of flashcards, one by one
-function cycleThroughDeck(deck) {
+// function cycleThroughDeck(shuffledDeck) {
+shuffledDeck = randomizeCards(frenchVocab)
+
+for (i = 0; i < shuffledDeck.length; i++) {
+  activeCard.addEventListener('dblclick', (e) => {
+    nextCard(e)
+  })
+  //shuffledDeck[i].ondblclick = console.log('click') //nextCard()
+}
+
+// loop through cards one by one
+
+function nextCard(e) {
   deck = randomizeCards(frenchVocab)
+  let card = e.target
+  console.log(card)
+  if (counter < deck.length) {
+    counter += 1
+    cardContent.innerHTML = deck[counter].q
+    activeCard.addEventListener('click', flipCard)
 
-  for (i = 0; i < deck.length; i++) {
-    activeCard[i].ondblclick = nextCard
-
-    function nextCard(deck) {
-      deck = randomizeCards(frenchVocab)
-      if (counter < deck.length) {
-        counter += 1
-        activeCard.innerHTML = deck[counter - 1]
-        if (counter >= 4) {
-          counter = 0
-        }
-      }
-    }
-
-    // loop through cards one by one
-
-    for (const card of deck) {
-      // show back of card with question
-      let cardContent = document.getElementById('card-content')
-      cardContent.innerHTML = card.q
-      // flip card on click to show face of card with answer
-
-      activeCard.addEventListener('click', flipCard)
-
-      function flipCard() {
-        //activeCard.classList.toggle('flip-card')
-        cardContent.innerHTML = card.a
-      }
+    if (counter >= 4) {
+      counter = 0
     }
   }
 }
 
+//for (const card of shuffledDeck) {
+// show back of card with question
+// cardContent.innerHTML = card.q
+// flip card on click to show face of card with answer
+
+//activeCard.addEventListener('click', flipCard)
+
+function flipCard() {
+  //activeCard.classList.toggle('flip-card')
+  cardContent.innerHTML = deck[counter].a
+}
+//}
+// }
+
 // on click, flip from q to a
 // on rightclick, move to next card (disable context menu)
 
-cycleThroughDeck(frenchVocab)
+//cycleThroughDeck(frenchVocab)
 
 // Do images or text content
 // On user click, flip flashcard around (animate module?)
