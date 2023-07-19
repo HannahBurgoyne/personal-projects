@@ -22,10 +22,39 @@ let dogTricks = [
 ]
 
 let counter = 0
-console.log(counter)
+//console.log(counter)
 let activeCard = document.getElementById('active-flashcard')
 let cardContent = document.getElementById('card-content')
 // Flashcards shown in random order to user
+
+//console.log(randomizeCards(dogTricks))
+
+// loop through array of flashcards, one by one
+// function cycleThroughDeck(shuffledDeck) {
+console.log((shuffledDeck = randomizeCards(frenchVocab)))
+
+for (i = 0; i < shuffledDeck.length; i++) {
+  activeCard.addEventListener('dblclick', (e) => {
+    nextCard(e)
+  })
+
+  activeCard.addEventListener('click', flipCard)
+  //shuffledDeck[i].ondblclick = console.log('click') //nextCard()
+}
+
+// loop through cards one by one
+function nextCard(e) {
+  //deck = randomizeCards(frenchVocab)
+  let card = e.target
+  if (counter < shuffledDeck.length) {
+    counter += 1
+    console.log((card.innerHTML = shuffledDeck[counter - 1].q))
+
+    if (counter >= 5) {
+      counter = 0
+    }
+  }
+}
 
 function randomizeCards(deck) {
   let shuffledDeck = deck.sort(function () {
@@ -33,36 +62,6 @@ function randomizeCards(deck) {
   })
 
   return shuffledDeck
-}
-
-//console.log(randomizeCards(dogTricks))
-
-// loop through array of flashcards, one by one
-// function cycleThroughDeck(shuffledDeck) {
-shuffledDeck = randomizeCards(frenchVocab)
-
-for (i = 0; i < shuffledDeck.length; i++) {
-  activeCard.addEventListener('dblclick', (e) => {
-    nextCard(e)
-  })
-  //shuffledDeck[i].ondblclick = console.log('click') //nextCard()
-}
-
-// loop through cards one by one
-
-function nextCard(e) {
-  deck = randomizeCards(frenchVocab)
-  let card = e.target
-  console.log(card)
-  if (counter < deck.length) {
-    counter += 1
-    cardContent.innerHTML = deck[counter].q
-    activeCard.addEventListener('click', flipCard)
-
-    if (counter >= 4) {
-      counter = 0
-    }
-  }
 }
 
 //for (const card of shuffledDeck) {
@@ -74,7 +73,7 @@ function nextCard(e) {
 
 function flipCard() {
   //activeCard.classList.toggle('flip-card')
-  cardContent.innerHTML = deck[counter].a
+  cardContent.innerHTML = shuffledDeck[counter].a
 }
 //}
 // }
