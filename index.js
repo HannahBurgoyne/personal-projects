@@ -21,14 +21,23 @@ let dogTricks = [
   { q: 'weave', a: "dog weaves through owner's legs" },
 ]
 
+//--- variables ---//
 let counter = 0
 let activeCard = document.getElementById('active-flashcard')
 let cardContent = document.getElementById('card-content')
+let deck = []
 
 // what needs to happen:
 
 //--- function to randomise deck ---//
 // computer randomises the deck, and returns it shuffled
+function randomizeCards(deck) {
+  let shuffledDeck = deck.sort(function () {
+    return Math.random() - 0.5
+  })
+
+  return shuffledDeck
+}
 
 // computer takes the shuffled deck, and iterates through it
 // for each card, inner content is set to side q
