@@ -22,79 +22,29 @@ let dogTricks = [
 ]
 
 let counter = 0
-//console.log(counter)
 let activeCard = document.getElementById('active-flashcard')
 let cardContent = document.getElementById('card-content')
-// Flashcards shown in random order to user
 
-//console.log(randomizeCards(dogTricks))
+// what needs to happen:
 
-// loop through array of flashcards, one by one
-// function cycleThroughDeck(shuffledDeck) {
-let shuffledDeck = randomizeCards(frenchVocab)
-console.log(shuffledDeck)
+//--- function to randomise deck ---//
+// computer randomises the deck, and returns it shuffled
 
-for (i = 0; i < shuffledDeck.length; i++) {
-  console.log(shuffledDeck[i])
-  // shuffledDeck[i].addEventListener('dblclick', (e) => {
-  //   nextCard(e)
-  // })
+// computer takes the shuffled deck, and iterates through it
+// for each card, inner content is set to side q
+// for each card, add an event listener which triggers flipCard onclick
 
-  activeCard.addEventListener('click', flipCard)
-  //shuffledDeck[i].ondblclick = console.log('click') //nextCard()
-}
+//--- function to flip the card ---//
+// set the inner content of the card to show side a
 
-// loop through cards one by one
+//--- function to go to next card ---//
+// set innerHTML to be the content of the current object index's value
+// increase counter by 1
+// if counter is greater than or equal to 5, counter goes back to 0
 
-function randomizeCards(deck) {
-  let shuffledDeck = deck.sort(function () {
-    return Math.random() - 0.5
-  })
-
-  return shuffledDeck
-}
-
-//for (const card of shuffledDeck) {
-// show back of card with question
-// cardContent.innerHTML = card.q
-// flip card on click to show face of card with answer
-
-//activeCard.addEventListener('click', flipCard)
-
-function flipCard() {
-  //activeCard.classList.toggle('flip-card')
-  cardContent.innerHTML = shuffledDeck[counter].a
-  console.log(shuffledDeck[counter].a)
-
-  shuffledDeck[counter].a.ondblclick = nextCard
-}
-
-function nextCard(e) {
-  //deck = randomizeCards(frenchVocab)
-  let card = e.target
-  if (counter < shuffledDeck.length) {
-    counter += 1
-    console.log((card.innerHTML = shuffledDeck[counter - 1].q))
-
-    if (counter >= 5) {
-      counter = 0
-    }
-  }
-}
-//}
-// }
-
-// on click, flip from q to a
-// on rightclick, move to next card (disable context menu)
-
-//cycleThroughDeck(frenchVocab)
-
-// Do images or text content
-// On user click, flip flashcard around (animate module?)
-
-// Progress bar along bottom of screen
-// User can tick yes or no on each card to rate their progress
-// Score shown at end to user
+//--- event listeners ---//
+// if the event key is arrow right, call nextCard function
+// if the event key is arrow left, call nextCard function
 
 // ---- Stretch/Bootcamp goals ---- //
 //
