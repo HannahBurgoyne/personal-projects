@@ -25,26 +25,35 @@ let dogTricks = [
 let counter = 0
 let activeCard = document.getElementById('active-flashcard')
 let cardContent = document.getElementById('card-content')
-let deck = []
+let deck = frenchVocab
+let shuffledDeck = deck
 
 // what needs to happen:
 
 //--- function to randomise deck ---//
 // computer randomises the deck, and returns it shuffled
-function randomizeCards(deck) {
-  let shuffledDeck = deck.sort(function () {
-    return Math.random() - 0.5
-  })
+// function randomizeCards(deck) {
+//   let shuffledDeck = deck.sort(function () {
+//     return Math.random() - 0.5
+//   })
 
-  return shuffledDeck
-}
+//   return shuffledDeck
+// }
 
 // computer takes the shuffled deck, and iterates through it
+for (i = 0; i < shuffledDeck.length; i++) {
+  console.log(shuffledDeck[i])
+  cardContent.textContent = shuffledDeck[i].q
+}
+
 // for each card, inner content is set to side q
 // for each card, add an event listener which triggers flipCard onclick
 
 //--- function to flip the card ---//
 // set the inner content of the card to show side a
+function flipCard() {
+  activeCard.textContent = shuffledDeck[property].a
+}
 
 //--- function to go to next card ---//
 // set innerHTML to be the content of the current object index's value
