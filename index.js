@@ -31,30 +31,20 @@ let cardContent = document.getElementById('card-content')
 
 // loop through array of flashcards, one by one
 // function cycleThroughDeck(shuffledDeck) {
-console.log((shuffledDeck = randomizeCards(frenchVocab)))
+let shuffledDeck = randomizeCards(frenchVocab)
+console.log(shuffledDeck)
 
 for (i = 0; i < shuffledDeck.length; i++) {
-  activeCard.addEventListener('dblclick', (e) => {
-    nextCard(e)
-  })
+  console.log(shuffledDeck[i])
+  // shuffledDeck[i].addEventListener('dblclick', (e) => {
+  //   nextCard(e)
+  // })
 
   activeCard.addEventListener('click', flipCard)
   //shuffledDeck[i].ondblclick = console.log('click') //nextCard()
 }
 
 // loop through cards one by one
-function nextCard(e) {
-  //deck = randomizeCards(frenchVocab)
-  let card = e.target
-  if (counter < shuffledDeck.length) {
-    counter += 1
-    console.log((card.innerHTML = shuffledDeck[counter - 1].q))
-
-    if (counter >= 5) {
-      counter = 0
-    }
-  }
-}
 
 function randomizeCards(deck) {
   let shuffledDeck = deck.sort(function () {
@@ -74,6 +64,22 @@ function randomizeCards(deck) {
 function flipCard() {
   //activeCard.classList.toggle('flip-card')
   cardContent.innerHTML = shuffledDeck[counter].a
+  console.log(shuffledDeck[counter].a)
+
+  shuffledDeck[counter].a.ondblclick = nextCard
+}
+
+function nextCard(e) {
+  //deck = randomizeCards(frenchVocab)
+  let card = e.target
+  if (counter < shuffledDeck.length) {
+    counter += 1
+    console.log((card.innerHTML = shuffledDeck[counter - 1].q))
+
+    if (counter >= 5) {
+      counter = 0
+    }
+  }
 }
 //}
 // }
