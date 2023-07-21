@@ -41,10 +41,10 @@ let shuffledDeck = deck
 // }
 
 // computer takes the shuffled deck, and iterates through it
-for (i = 0; i < shuffledDeck.length; i++) {
-  console.log(shuffledDeck[i])
-  cardContent.textContent = shuffledDeck[i].q
-}
+shuffledDeck.forEach((card, index) => {
+  cardContent.textContent = shuffledDeck[index].q
+  activeCard.addEventListener('click', flipCard)
+})
 
 // for each card, inner content is set to side q
 // for each card, add an event listener which triggers flipCard onclick
@@ -52,7 +52,7 @@ for (i = 0; i < shuffledDeck.length; i++) {
 //--- function to flip the card ---//
 // set the inner content of the card to show side a
 function flipCard() {
-  activeCard.textContent = shuffledDeck[property].a
+  cardContent.textContent = shuffledDeck[counter].a
 }
 
 //--- function to go to next card ---//
