@@ -25,10 +25,7 @@ let dogTricks = [
 let counter = 0
 let activeCard = document.getElementById('active-flashcard')
 let cardContent = document.getElementById('card-content')
-// let deck = frenchVocab
 let shuffledDeck = randomizeCards(frenchVocab)
-
-// what needs to happen:
 
 //--- function to randomise deck ---//
 // computer randomises the deck, and returns it shuffled
@@ -46,20 +43,12 @@ shuffledDeck.forEach((card) => {
   activeCard.addEventListener('click', flipCard)
 })
 
-// for each card, inner content is set to side q
-// for each card, add an event listener which triggers flipCard onclick
-
 //--- function to flip the card ---//
-// set the inner content of the card to show side a
 function flipCard() {
   cardContent.textContent = shuffledDeck[counter].a
 }
 
 //--- function to go to next card ---//
-// set innerHTML to be the content of the current object index's value
-// increase counter by 1
-// if counter is greater than or equal to 5, counter goes back to 0
-
 function nextCard() {
   counter += 1
   if (counter >= 5) {
@@ -69,9 +58,6 @@ function nextCard() {
 }
 
 //--- event listeners ---//
-// if the event key is arrow right, call nextCard function
-// if the event key is arrow left, call nextCard function
-
 document.addEventListener('keydown', function (evt) {
   if (evt.key == 'ArrowRight') {
     nextCard()
