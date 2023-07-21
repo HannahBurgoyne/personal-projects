@@ -41,8 +41,8 @@ let shuffledDeck = deck
 // }
 
 // computer takes the shuffled deck, and iterates through it
-shuffledDeck.forEach((card, index) => {
-  cardContent.textContent = shuffledDeck[index].q
+shuffledDeck.forEach((card) => {
+  cardContent.textContent = shuffledDeck[counter].q
   activeCard.addEventListener('click', flipCard)
 })
 
@@ -60,9 +60,25 @@ function flipCard() {
 // increase counter by 1
 // if counter is greater than or equal to 5, counter goes back to 0
 
+function nextCard() {
+  counter += 1
+  if (counter >= 5) {
+    counter = 0
+  }
+  cardContent.textContent = shuffledDeck[counter].q
+}
+
 //--- event listeners ---//
 // if the event key is arrow right, call nextCard function
 // if the event key is arrow left, call nextCard function
+
+document.addEventListener('keydown', function (evt) {
+  if (evt.key == 'ArrowRight') {
+    nextCard()
+  } else if (evt.key == 'ArrowLeft') {
+    nextCard()
+  }
+})
 
 // ---- Stretch/Bootcamp goals ---- //
 //
