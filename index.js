@@ -25,20 +25,20 @@ let dogTricks = [
 let counter = 0
 let activeCard = document.getElementById('active-flashcard')
 let cardContent = document.getElementById('card-content')
-let deck = frenchVocab
-let shuffledDeck = deck
+// let deck = frenchVocab
+let shuffledDeck = randomizeCards(frenchVocab)
 
 // what needs to happen:
 
 //--- function to randomise deck ---//
 // computer randomises the deck, and returns it shuffled
-// function randomizeCards(deck) {
-//   let shuffledDeck = deck.sort(function () {
-//     return Math.random() - 0.5
-//   })
+function randomizeCards(deck) {
+  let shuffledDeck = deck.sort(function () {
+    return Math.random() - 0.5
+  })
 
-//   return shuffledDeck
-// }
+  return shuffledDeck
+}
 
 // computer takes the shuffled deck, and iterates through it
 shuffledDeck.forEach((card) => {
