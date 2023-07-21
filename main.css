@@ -55,6 +55,18 @@ a {
   line-height: 220px;
 }
 
+#active-flashcard-inner {
+  border: solid 2px black;
+  border-radius: 15%;
+  height: 380px;
+  width: 280px;
+  background-color: green;
+  padding: 5px;
+  line-height: 220px;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
 .flip-card {
   transform: rotateY(180deg);
 }
