@@ -21,41 +21,14 @@ let dogTricks = [
   { q: 'weave', a: "dog weaves through owner's legs" },
 ]
 
+//--- variables ---//
 let counter = 0
-//console.log(counter)
 let activeCard = document.getElementById('active-flashcard')
 let cardContent = document.getElementById('card-content')
-// Flashcards shown in random order to user
+let shuffledDeck = randomizeCards(frenchVocab)
 
-//console.log(randomizeCards(dogTricks))
-
-// loop through array of flashcards, one by one
-// function cycleThroughDeck(shuffledDeck) {
-console.log((shuffledDeck = randomizeCards(frenchVocab)))
-
-for (i = 0; i < shuffledDeck.length; i++) {
-  activeCard.addEventListener('dblclick', (e) => {
-    nextCard(e)
-  })
-
-  activeCard.addEventListener('click', flipCard)
-  //shuffledDeck[i].ondblclick = console.log('click') //nextCard()
-}
-
-// loop through cards one by one
-function nextCard(e) {
-  //deck = randomizeCards(frenchVocab)
-  let card = e.target
-  if (counter < shuffledDeck.length) {
-    counter += 1
-    console.log((card.innerHTML = shuffledDeck[counter - 1].q))
-
-    if (counter >= 5) {
-      counter = 0
-    }
-  }
-}
-
+//--- function to randomise deck ---//
+// computer randomises the deck, and returns it shuffled
 function randomizeCards(deck) {
   let shuffledDeck = deck.sort(function () {
     return Math.random() - 0.5
@@ -64,31 +37,34 @@ function randomizeCards(deck) {
   return shuffledDeck
 }
 
-//for (const card of shuffledDeck) {
-// show back of card with question
-// cardContent.innerHTML = card.q
-// flip card on click to show face of card with answer
+// computer takes the shuffled deck, and iterates through it
+shuffledDeck.forEach((card) => {
+  cardContent.textContent = shuffledDeck[counter].q
+  activeCard.addEventListener('click', flipCard)
+})
 
-//activeCard.addEventListener('click', flipCard)
-
+//--- function to flip the card ---//
 function flipCard() {
-  //activeCard.classList.toggle('flip-card')
-  cardContent.innerHTML = shuffledDeck[counter].a
+  cardContent.textContent = shuffledDeck[counter].a
 }
-//}
-// }
 
-// on click, flip from q to a
-// on rightclick, move to next card (disable context menu)
+//--- function to go to next card ---//
+function nextCard() {
+  counter += 1
+  if (counter >= 5) {
+    counter = 0
+  }
+  cardContent.textContent = shuffledDeck[counter].q
+}
 
-//cycleThroughDeck(frenchVocab)
-
-// Do images or text content
-// On user click, flip flashcard around (animate module?)
-
-// Progress bar along bottom of screen
-// User can tick yes or no on each card to rate their progress
-// Score shown at end to user
+//--- event listeners ---//
+document.addEventListener('keydown', function (evt) {
+  if (evt.key == 'ArrowRight') {
+    nextCard()
+  } else if (evt.key == 'ArrowLeft') {
+    nextCard()
+  }
+})
 
 // ---- Stretch/Bootcamp goals ---- //
 //
