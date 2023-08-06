@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "an app which allows users to make and use custom flashcards",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "node server/index",
     "dev": "nodemon --ignore 'server/data/' server/index",
