@@ -1,8 +1,8 @@
 import * as Path from 'node:path'
 import * as URL from 'node:url'
-
 import express from 'express'
 import hbs from 'express-handlebars'
+import routes from '../server/routes.js'
 
 const server = express()
 
@@ -17,5 +17,9 @@ server.set('view engine', 'hbs')
 server.set('views', Path.resolve('server/views'))
 
 // Your routes/router(s) should go here
+
+// home route /
+// create new cards route /create
+// each deck route /:id
 
 export default server

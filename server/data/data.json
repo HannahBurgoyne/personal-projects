@@ -9,7 +9,7 @@
   { "q": "mouse", 
     "a": "une souris" },
   { "q": "horse", 
-    "a": "un cheval" },
+    "a": "un cheval" }
 ],
 
 "dogTricks": [
@@ -22,7 +22,7 @@
   },
   { "q": "shake", 
     "a": "dog offers each paw and lets each be shaken" },
-  { "q": "weave", "a": "dog weaves through owner's legs" },
+  { "q": "weave", "a": "dog weaves through owner's legs" }
 ]
 
 }
