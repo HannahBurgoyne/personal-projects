@@ -1,0 +1,15 @@
+{
+  "name": "flashcards-app",
+  "version": "1.0.0",
+  "description": "an app which allows users to make and use custom flashcards",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "flashcards",
+    "app"
+  ],
+  "author": "Hannah Burgoyne",
+  "license": "ISC"
+}
