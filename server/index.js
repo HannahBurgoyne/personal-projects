@@ -21,6 +21,14 @@ let dogTricks = [
   { q: 'weave', a: "dog weaves through owner's legs" },
 ]
 
+import server from './server.js'
+
+const port = 3000
+
+server.listen(port, function () {
+  console.log('Server is listening on port', port)
+})
+
 //--- variables ---//
 let counter = 0
 let activeCard = document.getElementById('active-flashcard')
