@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node server/index",
     "dev": "nodemon --ignore 'server/data/' server/index",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest",
     "knex": "knex --knexfile ./server/db/knexfile.js"
   },
   "keywords": [
