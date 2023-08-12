@@ -7,7 +7,8 @@
   "scripts": {
     "start": "node server/index",
     "dev": "nodemon --ignore 'server/data/' server/index",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "knex": "knex --knexfile ./server/db/knexfile.js"
   },
   "keywords": [
     "flashcards",
@@ -17,7 +18,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.18.2",
-    "express-handlebars": "^7.1.1"
+    "express-handlebars": "^7.1.1",
+    "knex": "^2.5.1",
+    "sqlite3": "^5.1.6"
   },
   "devDependencies": {
     "nodemon": "^3.0.1",
