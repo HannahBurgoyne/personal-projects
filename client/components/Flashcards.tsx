@@ -1,23 +1,13 @@
-console.log('Welcome to Flashcards!')
 
-// ---- Sprint goals ---- //
 
-import server from './server.js'
-
-const port = 3000
-
-server.listen(port, function () {
-  console.log('Server is listening on port', port)
-})
-
-//--- variables ---//
+function Flashcards() {
+  //--- variables ---//
 // let counter = 0
 // let activeCard = document.getElementById('active-flashcard')
 // let cardContent = document.getElementById('card-content')
 // let shuffledDeck = randomizeCards(frenchVocab)
 
 // //--- function to randomise deck ---//
-// // computer randomises the deck, and returns it shuffled
 // function randomizeCards(deck) {
 //   let shuffledDeck = deck.sort(function () {
 //     return Math.random() - 0.5
@@ -54,9 +44,6 @@ server.listen(port, function () {
 //     nextCard()
 //   }
 // })
+}
 
-// ---- Stretch/Bootcamp goals ---- //
-//
-// User can make their own custom cards
-// Collections of cards can be stored in databases and selected
-// Algorithm which shows user their lower rated cards more often
+export default Flashcards
