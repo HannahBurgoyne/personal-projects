@@ -1,7 +1,10 @@
-export interface Flashcard {
-  id: number
+export interface NewFlashcard {
   question: string
   answer: string
+}
+
+export interface Flashcard extends NewFlashcard {
+  id: number
 }
 
 export interface Deck {
