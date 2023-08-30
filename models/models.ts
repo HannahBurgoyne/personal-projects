@@ -7,9 +7,13 @@ export interface Flashcard extends NewFlashcard {
   id: number
 }
 
-export interface Deck {
-  id: string
+export interface NewDeck {
+  deck_name: string
   author: string
+}
+
+export interface Deck extends NewDeck {
+  id: number
   flashcards: []
 }
 
