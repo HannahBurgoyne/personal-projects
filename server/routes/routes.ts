@@ -3,19 +3,14 @@ import {
   addNewDeck,
   addNewFlashcard,
   addNewFlashcardsToDeck,
-  deleteDeck,
-  deleteFlashcard,
   getAllDecks,
   getAllFlashcards,
-  updateFlashcard,
 } from '../db/db'
 import { Deck, Flashcard } from '../../models/models'
 
 const router = express.Router()
 
-// DECK ROUTES //
-
-// WORKING IN INSOMNIA
+// WORKING IN INSOMNIA - GET ALL DECKS FOR THE DECK LIBRARY
 router.get('/', async (req, res) => {
   try {
     const decks = await getAllDecks()
@@ -27,7 +22,7 @@ router.get('/', async (req, res) => {
   }
 })
 
-//
+// WORKING IN INSOMNIA - CREATE A NEW DECK AND ALL ITS FLASHCARDS DATA
 router.post('/:deckId', async (req, res) => {
   try {
     const { deck_name, author, flashcards } = req.body
@@ -54,21 +49,7 @@ router.post('/:deckId', async (req, res) => {
   }
 })
 
-// WORKING IN INSOMNIA
-router.delete('/:deckId', async (req, res) => {
-  try {
-    const deckId = Number(req.params.deckId)
-    await deleteDeck(deckId)
-    res.sendStatus(200)
-  } catch (error) {
-    if (error instanceof Error) {
-      res.status(500).send(error.message)
-    }
-  }
-})
-
-// FLASHCARDS ROUTES //
-
+// GET ALL FLASHCARDS CORRESPONDING TO A DECK ID - WORKING
 router.get('/:deckId', async (req, res) => {
   try {
     const deckId = Number(req.params.deckId)
@@ -80,42 +61,45 @@ router.get('/:deckId', async (req, res) => {
     }
   }
 })
+// // WORKING IN INSOMNIA - change this to delete deck, and all flashcards associated with it
+// router.delete('/:deckId', async (req, res) => {
+//   try {
+//     const deckId = Number(req.params.deckId)
+//     await deleteDeck(deckId)
+//     res.sendStatus(200)
+//   } catch (error) {
+//     if (error instanceof Error) {
+//       res.status(500).send(error.message)
+//     }
+//   }
+// })
 
-// WORKING IN INSOMIA BUT TAKES A LONG ASS TIME
-router.post('/:deckId/', async (req, res) => {
-  try {
-    const deckId = Number(req.params.deckId)
-    const newFlashcard = req.body
-    await addNewFlashcard(deckId, newFlashcard)
-  } catch (error) {
-    if (error instanceof Error) {
-      res.status(500).send(error.message)
-    }
-  }
-})
+// FLASHCARDS ROUTES //
 
-router.delete('/:flashcardId', async (req, res) => {
-  try {
-    const flashcardId = Number(req.params.flashcardId)
-    await deleteFlashcard(flashcardId)
-    res.sendStatus(200)
-  } catch (error) {
-    if (error instanceof Error) {
-      res.status(500).send(error.message)
-    }
-  }
-})
+// NO LONGER NEEDED BUT USE AS REFERENCE FOR ABOVE FUNC
+// router.delete('/:flashcardId', async (req, res) => {
+//   try {
+//     const flashcardId = Number(req.params.flashcardId)
+//     await deleteFlashcard(flashcardId)
+//     res.sendStatus(200)
+//   } catch (error) {
+//     if (error instanceof Error) {
+//       res.status(500).send(error.message)
+//     }
+//   }
+// })
 
-router.patch('/:flashcardId', async (req, res) => {
-  try {
-    const flashcardId = Number(req.params.flashcardId)
-    const updatedFlashcard = req.body
-    await updateFlashcard(flashcardId, updatedFlashcard)
-  } catch (error) {
-    if (error instanceof Error) {
-      res.status(500).send(error.message)
-    }
-  }
-})
+// STRETCH
+// router.patch('/:flashcardId', async (req, res) => {
+//   try {
+//     const flashcardId = Number(req.params.flashcardId)
+//     const updatedFlashcard = req.body
+//     await updateFlashcard(flashcardId, updatedFlashcard)
+//   } catch (error) {
+//     if (error instanceof Error) {
+//       res.status(500).send(error.message)
+//     }
+//   }
+// })
 
 export default router
