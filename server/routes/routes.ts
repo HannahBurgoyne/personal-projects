@@ -2,13 +2,14 @@ import express from 'express'
 import {
   addNewDeck,
   addNewFlashcard,
+  addNewFlashcardsToDeck,
   deleteDeck,
   deleteFlashcard,
   getAllDecks,
   getAllFlashcards,
   updateFlashcard,
 } from '../db/db'
-import { Flashcard } from '../../models/models'
+import { Deck, Flashcard } from '../../models/models'
 
 const router = express.Router()
 
@@ -26,11 +27,25 @@ router.get('/', async (req, res) => {
   }
 })
 
-// WORKING IN INSOMNIA
-router.post('/', async (req, res) => {
+//
+router.post('/:deckId', async (req, res) => {
   try {
-    const newDeck = req.body
+    const { deck_name, author, flashcards } = req.body
+    const deckFlashcardsData: Deck = {
+      id: Number(req.params.deckId),
+      deck_name: deck_name,
+      author: author,
+      flashcards: flashcards as Flashcard[],
+    }
+
+    const newDeck = {
+      deck_name,
+      author,
+    }
     await addNewDeck(newDeck)
+    await addNewFlashcard(flashcards)
+    await addNewFlashcardsToDeck(deckFlashcardsData)
+
     res.sendStatus(201)
   } catch (error) {
     if (error instanceof Error) {

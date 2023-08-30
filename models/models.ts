@@ -14,7 +14,7 @@ export interface NewDeck {
 
 export interface Deck extends NewDeck {
   id: number
-  flashcards: []
+  flashcards: Flashcard[]
 }
 
 export interface AllDecks {
