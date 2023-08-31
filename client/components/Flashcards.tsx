@@ -2,6 +2,7 @@
 // Sits inside layout
 
 function Flashcards() {
+  return <p>This is the page where you can use the flashcards</p>
   //--- variables ---//
   // let counter = 0
   // let activeCard = document.getElementById('active-flashcard')
