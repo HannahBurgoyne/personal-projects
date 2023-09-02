@@ -12,21 +12,32 @@ interface Props {
 
 function Flashcards(props: Props) {
 
-  const { data } = useQuery(['flashcards'], fetchDeck(props.id))
+const deckId = props.id
+const queryKey = ['flashcards', deckId];
+
+const { data } = useQuery(queryKey, () => fetchDeck(deckId));
 
 
 //--- function to randomise deck ---//
-  function randomizeCards(deck) {
-    let shuffledDeck = deck.sort(function () {
-      return Math.random() - 0.5
-    })
-    return shuffledDeck
-  }
+  // function randomizeCards(deck) {
+  //   let shuffledDeck = deck.sort(function () {
+  //     return Math.random() - 0.5
+  //   })
+  //   return shuffledDeck
+  // }
 
 
-
-
-  return <p>This is the page where you can use the flashcards</p>
+  return (
+    <>
+    {data?.map((flashcard) => (
+      <div>
+        <p>{flashcard.question}</p>
+        <p>{flashcard.answer}</p>
+      </div>
+    ))}
+  <p>This is the page where you can use the flashcards</p>
+    </>
+  )
   //--- variables ---//
   // let counter = 0
   // let activeCard = document.getElementById('active-flashcard')

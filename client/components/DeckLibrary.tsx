@@ -10,7 +10,7 @@ import { useState } from 'react'
 
 function DeckLibrary() {
   const { data } = useQuery(['deck'], fetchAllDecks)
-  const [useFlashcards, setUseFlashcards] = useState(false)
+  const [useFlashcards, setUseFlashcards] = useState(true)
 
 
   // have an onclick function to show flashcards for the deck you click on
@@ -21,9 +21,9 @@ function DeckLibrary() {
     <div>
       { data && data.map ((deck) => (
         <>
-        <div key={deck.id}>
-          <h2>{deck.deck_name}</h2>
-          <h4>{deck.author}</h4>
+        <div key={`flashcard ${deck.id}`}>
+          <h2 key={`name ${deck.id}`}>{deck.deck_name}</h2>
+          <h4 key={`author ${deck.id}`}>{deck.author}</h4>
           <button>Use deck</button>
 
         {useFlashcards ? (

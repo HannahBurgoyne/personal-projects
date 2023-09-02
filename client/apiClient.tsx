@@ -1,5 +1,5 @@
 import request from 'superagent'
-import { Deck, Flashcard } from '../models/models'
+import { Deck, Flashcard, FlashcardData } from '../models/models'
 
 const baseUrl = '/api/v1/flashcardsapp/'
 
@@ -10,7 +10,7 @@ export async function fetchAllDecks() {
 
 export async function fetchDeck(deckId: number) {
   const data = await request.get(`${baseUrl}${deckId}`)
-  return data.body as Flashcard[]
+  return data.body as FlashcardData
 }
 
 export async function addNewDeck(deckId: number, deckData: Deck) {
