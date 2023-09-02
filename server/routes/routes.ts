@@ -3,6 +3,8 @@ import {
   addNewDeck,
   addNewFlashcard,
   addNewFlashcardsToDeck,
+  deleteDeck,
+  deleteDeckAndFlashcards,
   getAllDecks,
   getAllFlashcards,
 } from '../db/db'
@@ -61,6 +63,32 @@ router.get('/:deckId', async (req, res) => {
     }
   }
 })
+
+// DELETE A DECK AND ALL CORRESPONDING FLASHCARDS  
+router.delete(':/deckId', async (req, res) => {
+  try {
+    const deckId = Number(req.params.deckId)
+    await deleteDeckAndFlashcards(deckId)
+    res.sendStatus(200)
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(500).send(error.message)
+    }
+  }
+})
+
+// NO LONGER NEEDED BUT USE AS REFERENCE FOR ABOVE FUNC
+// router.delete('/:flashcardId', async (req, res) => {
+//   try {
+//     const flashcardId = Number(req.params.flashcardId)
+//     await deleteFlashcard(flashcardId)
+//     res.sendStatus(200)
+//   } catch (error) {
+//     if (error instanceof Error) {
+//       res.status(500).send(error.message)
+//     }
+//   }
+// })
 // // WORKING IN INSOMNIA - change this to delete deck, and all flashcards associated with it
 // router.delete('/:deckId', async (req, res) => {
 //   try {
@@ -76,18 +104,7 @@ router.get('/:deckId', async (req, res) => {
 
 // FLASHCARDS ROUTES //
 
-// NO LONGER NEEDED BUT USE AS REFERENCE FOR ABOVE FUNC
-// router.delete('/:flashcardId', async (req, res) => {
-//   try {
-//     const flashcardId = Number(req.params.flashcardId)
-//     await deleteFlashcard(flashcardId)
-//     res.sendStatus(200)
-//   } catch (error) {
-//     if (error instanceof Error) {
-//       res.status(500).send(error.message)
-//     }
-//   }
-// })
+
 
 // STRETCH
 // router.patch('/:flashcardId', async (req, res) => {

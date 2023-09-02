@@ -6,14 +6,83 @@ export function getAllDecks(db = connection): Promise<Deck[]> {
   return db<Deck>('decks').select()
 }
 
+// SEE IF YOU CAN REFACTOR THE BELOW 3 FUNCTIONS INTO ONE USING TRANSACTIONS
+
 // function to add a new deck - call the decks db
 export function addNewDeck(newDeck: NewDeck, db = connection): Promise<Deck[]> {
   return db<Deck>('decks').insert(newDeck)
 }
 
-// function to delete a deck - call the decks db
-export function deleteDeck(deckId: number, db = connection): Promise<Deck[]> {
-  return db<Deck>('decks').where('id', deckId).del()
+// function to add a new flashcard to a deck - call the flashcards, decks, and deck-flashcards db
+export async function addNewFlashcard(
+  flashcards: Flashcard[],
+  db = connection
+): Promise<Flashcard> {
+  const flashcardsData = flashcards.map((flashcard) => ({
+    number: flashcard.id,
+    question: flashcard.question,
+    answer: flashcard.answer,
+  }))
+  return db<Flashcard>('flashcards').insert(flashcardsData)
+}
+
+// function to add flashcard ids and deck id to junction db
+export async function addNewFlashcardsToDeck(
+  { id, flashcards }: Deck,
+  db = connection
+) {
+  const flashcardsData = flashcards.map((flashcard) => ({
+    deck_id: id,
+    flashcard_id: flashcard.id,
+  }))
+
+  await db('joining_table').insert(flashcardsData)
+}
+// // function to delete a deck - call the decks db
+// export function deleteDeck(deckId: number, db = connection): Promise<Deck[]> {
+//   return db<Flashcard>('flashcards').join(
+//     'joining_table',
+//     'flashcards.number',
+//     '=',
+//     'joining_table.flashcard_id'
+//   )
+//   .join('decks', 'joining_table.deck_id', '=', 'decks.id')
+//   .where('deckId', deckId)
+//   .where('flashcardId', )
+//   .del(
+//     'flashcards.number',
+//     'decks.id'
+//   )
+// }
+
+
+export async function deleteDeckAndFlashcards(deckId: number, db = connection) {
+  try {
+    await db.transaction(async (trx) => {
+      // find flashcards associated with the deck
+      const flashcardIds = await trx('deck-flashcards')
+        .where('deck_id', deckId)
+        .pluck('flashcard_id')
+
+      // delete rows in junction table
+      await trx('deck-flashcards')
+        .where('deck_id', deckId)
+        .del()
+
+      // delete deck
+      await trx('decks')
+        .where('id', deckId)
+        .del()
+
+      // delete flashcards 
+      await trx('flashcards')
+        .whereIn('id', flashcardIds)
+        .del()
+    })
+  } catch (error) {
+    console.error('Error deleting deck and flashcards:', error)
+    throw error
+  }
 }
 
 // function to get all flashcards in a deck - call the flashcards, decks, and joining table db
@@ -52,31 +121,6 @@ export function getAllFlashcards(
     )
 }
 
-// function to add a new flashcard to a deck - call the flashcards, decks, and deck-flashcards db
-export async function addNewFlashcard(
-  flashcards: Flashcard[],
-  db = connection
-): Promise<Flashcard> {
-  const flashcardsData = flashcards.map((flashcard) => ({
-    number: flashcard.id,
-    question: flashcard.question,
-    answer: flashcard.answer,
-  }))
-  return db<Flashcard>('flashcards').insert(flashcardsData)
-}
-
-// function to add flashcard ids and deck id to junction db
-export async function addNewFlashcardsToDeck(
-  { id, flashcards }: Deck,
-  db = connection
-) {
-  const flashcardsData = flashcards.map((flashcard) => ({
-    deck_id: id,
-    flashcard_id: flashcard.id,
-  }))
-
-  await db('joining_table').insert(flashcardsData)
-}
 
 // function to delete a flashcard from a deck - call the flashcards, decks, and deck-flashcards db
 export function deleteFlashcard(
