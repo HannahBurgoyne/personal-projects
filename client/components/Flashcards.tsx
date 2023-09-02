@@ -1,7 +1,13 @@
 // This is where you loop through the flashcards deck
 // Sits inside layout
 
-function Flashcards() {
+
+interface Props {
+  id: number
+}
+
+
+function Flashcards(props: Props) {
 
 
 //--- function to randomise deck ---//
