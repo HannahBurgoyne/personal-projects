@@ -5,7 +5,7 @@ const baseUrl = '/api/v1/flashcardsapp/'
 
 export async function fetchAllDecks() {
   const data = await request.get(baseUrl)
-  return data.body as AllDecks[]
+  return data.body as Deck[]
 }
 
 export async function fetchDeck(deckId: number) {
