@@ -20,3 +20,5 @@ export interface Deck extends NewDeck {
 export interface AllDecks {
   decks: Deck[]
 }
+
+

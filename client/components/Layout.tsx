@@ -7,9 +7,10 @@ function Layout() {
   return (
     <>
     <main>
-      <div id="parent-container">
+   
+        <p>This is the layout</p>
       <Outlet />
-      </div>
+ 
     </main>
     <Footer/>
     </>
