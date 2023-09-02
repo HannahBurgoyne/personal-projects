@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { fetchAllDecks } from '../apiClient'
 import { Link } from 'react-router-dom'
+import Flashcards from './Flashcards'
 // This is where the deck library lives
 // Sits inside layout
 
@@ -23,6 +24,10 @@ function DeckLibrary() {
         </div>
       ))}
     </div>
+  </section>
+  
+  <section>
+  <Flashcards/>
   </section>
   </>)
 }

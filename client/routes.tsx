@@ -7,19 +7,8 @@ import Home from './components/Home'
 export const routes = createRoutesFromElements(
   <Route path="/" element={<Layout />}>
     <Route index element={<Home />} />
-    <Route path="/deck-library" element={<DeckLibrary />} />
-    <Route path="/:deckId" element={<Flashcards />} />
+    <Route path="/deck-library" element={<DeckLibrary />}/>
   </Route>
 )
 
-// Use the below code if you want to make Flashcards a child of Deck Library
-
-// export const routes = createRoutesFromElements(
-//   <Route path="/" element={<Layout />}>
-//     <Route index element={<Home />} />
-//     <Route path="/deck-library" element={<DeckLibrary />}>
-//       <Route path=":deckId" element={<Flashcards />} />
-//     </Route>
-//   </Route>
-// );
 

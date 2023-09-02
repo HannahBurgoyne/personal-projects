@@ -2,19 +2,26 @@
 // Sits inside layout
 
 function Flashcards() {
+
+
+//--- function to randomise deck ---//
+  function randomizeCards(deck) {
+    let shuffledDeck = deck.sort(function () {
+      return Math.random() - 0.5
+    })
+    return shuffledDeck
+  }
+
+
+
+
   return <p>This is the page where you can use the flashcards</p>
   //--- variables ---//
   // let counter = 0
   // let activeCard = document.getElementById('active-flashcard')
   // let cardContent = document.getElementById('card-content')
   // let shuffledDeck = randomizeCards(frenchVocab)
-  // //--- function to randomise deck ---//
-  // function randomizeCards(deck) {
-  //   let shuffledDeck = deck.sort(function () {
-  //     return Math.random() - 0.5
-  //   })
-  //   return shuffledDeck
-  // }
+  
   // // computer takes the shuffled deck, and iterates through it
   // shuffledDeck.forEach((card) => {
   //   cardContent.textContent = shuffledDeck[counter].q
