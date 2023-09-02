@@ -3,7 +3,6 @@ import {
   addNewDeck,
   addNewFlashcard,
   addNewFlashcardsToDeck,
-  deleteDeck,
   deleteDeckAndFlashcards,
   getAllDecks,
   getAllFlashcards,

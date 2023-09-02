@@ -16,3 +16,7 @@ export async function fetchDeck(deckId: number) {
 export async function addNewDeck(deckId: number, deckData: Deck) {
   await request.post(`${baseUrl}${deckId}`).send(deckData)
 }
+
+export async function deleteDeck(deckId: number) {
+  await request.delete(`${baseUrl}${deckId}`)
+}
