@@ -3,6 +3,7 @@
 
 import { useQuery } from "@tanstack/react-query"
 import { fetchDeck } from "../apiClient"
+import { FlashcardData } from "../../models/models";
 
 
 interface Props {
@@ -19,12 +20,12 @@ const { data } = useQuery(queryKey, () => fetchDeck(deckId));
 
 
 //--- function to randomise deck ---//
-  // function randomizeCards(deck) {
-  //   let shuffledDeck = deck.sort(function () {
-  //     return Math.random() - 0.5
-  //   })
-  //   return shuffledDeck
-  // }
+  function randomizeCards(data: FlashcardData[]) {
+    let shuffledDeck = data.sort(function () {
+      return Math.random() - 0.5
+    })
+    return shuffledDeck
+  }
 
 
   return (
