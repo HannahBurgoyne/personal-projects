@@ -1,6 +1,9 @@
 // This is where you loop through the flashcards deck
 // Sits inside layout
 
+import { useQuery } from "@tanstack/react-query"
+import { fetchDeck } from "../apiClient"
+
 
 interface Props {
   id: number
@@ -8,6 +11,8 @@ interface Props {
 
 
 function Flashcards(props: Props) {
+
+  const { data } = useQuery(['flashcards'], fetchDeck(props.id))
 
 
 //--- function to randomise deck ---//

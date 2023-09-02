@@ -64,7 +64,7 @@ router.get('/:deckId', async (req, res) => {
 })
 
 // DELETE A DECK AND ALL CORRESPONDING FLASHCARDS  
-router.delete(':/deckId', async (req, res) => {
+router.delete('/:deckId', async (req, res) => {
   try {
     const deckId = Number(req.params.deckId)
     await deleteDeckAndFlashcards(deckId)
