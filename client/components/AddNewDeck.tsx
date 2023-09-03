@@ -5,11 +5,17 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Deck, NewDeck } from '../../models/models'
 import { addNewDeck } from '../apiClient'
 
-function AddNewDeck() {
+interface Props {
+  total: number
+}
+
+function AddNewDeck(props: Props) {
   const queryClient = useQueryClient()
 
+  const id = props.total + 1
+
   const addMutation = useMutation({
-    mutationFn: (newDeck: Deck) => addNewDeck(id, newDeck),
+    mutationFn: (newDeck: NewDeck) => addNewDeck(id, newDeck),
     onSuccess: () => {
       queryClient.invalidateQueries(['decks'])
     },
@@ -60,6 +66,8 @@ function AddNewDeck() {
         },
       ],
     }
+
+    addMutation.mutate(newDeck)
   }
 
   return (
