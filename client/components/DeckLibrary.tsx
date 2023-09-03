@@ -41,11 +41,7 @@ function DeckLibrary() {
                 </div>
               </div>
 
-              <div>
-                <button onClick={showAddForm} className="add-deck-btn">
-                  Add new deck
-                </button>
-              </div>
+              <div></div>
             </div>
 
             {useFlashcards ? (
@@ -69,6 +65,9 @@ function DeckLibrary() {
             )}
           </>
         ))}
+      <button onClick={showAddForm} className="add-deck-btn">
+        Add new deck
+      </button>
     </div>
   )
 }

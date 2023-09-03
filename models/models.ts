@@ -4,7 +4,7 @@ export interface NewFlashcard {
 }
 
 export interface Flashcard extends NewFlashcard {
-  id: number
+  number: number
 }
 
 export interface FlashcardData {
@@ -18,7 +18,7 @@ export interface FlashcardData {
 export interface NewDeck {
   deck_name: string
   author: string
-  flashcards: NewFlashcard[]
+  flashcards: Flashcard[]
 }
 
 export interface Deck extends NewDeck {

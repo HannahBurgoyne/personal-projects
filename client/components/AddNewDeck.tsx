@@ -12,12 +12,12 @@ interface Props {
 function AddNewDeck(props: Props) {
   const queryClient = useQueryClient()
 
-  const id = props.total + 1
+  const number = props.total + 1
 
   const addMutation = useMutation({
-    mutationFn: (newDeck: NewDeck) => addNewDeck(id, newDeck),
+    mutationFn: (newDeck: NewDeck) => addNewDeck(number, newDeck),
     onSuccess: () => {
-      queryClient.invalidateQueries(['decks'])
+      queryClient.invalidateQueries(['deck'])
     },
   })
 
@@ -45,25 +45,14 @@ function AddNewDeck(props: Props) {
       author: deckAuthor,
       flashcards: [
         {
+          number: 1,
           question: flashcard1Question,
           answer: flashcard1Answer,
         },
-        {
-          question: flashcard2Question,
-          answer: flashcard2Answer,
-        },
-        {
-          question: flashcard3Question,
-          answer: flashcard3Answer,
-        },
-        {
-          question: flashcard4Question,
-          answer: flashcard4Answer,
-        },
-        {
-          question: flashcard5Question,
-          answer: flashcard5Answer,
-        },
+        { number: 2, question: flashcard2Question, answer: flashcard2Answer },
+        { number: 3, question: flashcard3Question, answer: flashcard3Answer },
+        { number: 4, question: flashcard4Question, answer: flashcard4Answer },
+        { number: 5, question: flashcard5Question, answer: flashcard5Answer },
       ],
     }
 
