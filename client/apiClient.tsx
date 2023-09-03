@@ -10,7 +10,7 @@ export async function fetchAllDecks() {
 
 export async function fetchDeck(deckId: number) {
   const data = await request.get(`${baseUrl}${deckId}`)
-  return data.body as FlashcardData
+  return data.body as FlashcardData[]
 }
 
 export async function addNewDeck(deckId: number, deckData: Deck) {
