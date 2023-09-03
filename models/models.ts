@@ -8,25 +8,23 @@ export interface Flashcard extends NewFlashcard {
 }
 
 export interface FlashcardData {
-  flashcardId: number,
-		deckId: number,
-		number: number,
-		question: string,
-		answer: string
+  flashcardId: number
+  deckId: number
+  number: number
+  question: string
+  answer: string
 }
 
 export interface NewDeck {
   deck_name: string
   author: string
+  flashcards: Flashcard[]
 }
 
 export interface Deck extends NewDeck {
   id: number
-  flashcards: Flashcard[]
 }
 
 export interface AllDecks {
   decks: Deck[]
 }
-
-

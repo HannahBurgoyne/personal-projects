@@ -1,7 +1,20 @@
 // This contains the form to add a new deck
 // Sits inside the layout, linked from deck library - or nested inside deck library as a toggle component
 
+import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { Deck, NewDeck } from '../../models/models'
+import { addNewDeck } from '../apiClient'
+
 function AddNewDeck() {
+  const queryClient = useQueryClient()
+
+  const addMutation = useMutation({
+    mutationFn: (newDeck: Deck) => addNewDeck(id, newDeck),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['decks'])
+    },
+  })
+
   return (
     <>
       <div className="addformcontainer">
