@@ -15,12 +15,59 @@ function AddNewDeck() {
     },
   })
 
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+
+    const target = e.currentTarget
+    const form = new FormData(target)
+
+    const deckName = form.get('deckName')?.valueOf() as string
+    const deckAuthor = form.get('deckAuthor')?.valueOf() as string
+    const flashcard1Question = form.get('flashcard1Q')?.valueOf() as string
+    const flashcard1Answer = form.get('flashcard1A')?.valueOf() as string
+    const flashcard2Question = form.get('flashcard2Q')?.valueOf() as string
+    const flashcard2Answer = form.get('flashcard2A')?.valueOf() as string
+    const flashcard3Question = form.get('flashcard3Q')?.valueOf() as string
+    const flashcard3Answer = form.get('flashcard3A')?.valueOf() as string
+    const flashcard4Question = form.get('flashcard4Q')?.valueOf() as string
+    const flashcard4Answer = form.get('flashcard4A')?.valueOf() as string
+    const flashcard5Question = form.get('flashcard5Q')?.valueOf() as string
+    const flashcard5Answer = form.get('flashcard5A')?.valueOf() as string
+
+    const newDeck: NewDeck = {
+      deck_name: deckName,
+      author: deckAuthor,
+      flashcards: [
+        {
+          question: flashcard1Question,
+          answer: flashcard1Answer,
+        },
+        {
+          question: flashcard2Question,
+          answer: flashcard2Answer,
+        },
+        {
+          question: flashcard3Question,
+          answer: flashcard3Answer,
+        },
+        {
+          question: flashcard4Question,
+          answer: flashcard4Answer,
+        },
+        {
+          question: flashcard5Question,
+          answer: flashcard5Answer,
+        },
+      ],
+    }
+  }
+
   return (
     <>
       <div className="addformcontainer">
         <h1>Add new deck</h1>
         <div className="add-form">
-          <form>
+          <form onSubmit={handleSubmit}>
             <label htmlFor="deck">Give your deck a name and author</label>
             <input
               className="new deck"
@@ -40,65 +87,65 @@ function AddNewDeck() {
               className="new deck"
               placeholder="question "
               type="text"
-              name="flashcard"
+              name="flashcard1Q"
             ></input>
             <input
               className="new deck"
               placeholder="answer "
               type="text"
-              name="flashcard"
+              name="flashcard1A"
             ></input>
             <label htmlFor="flashcards">Card 2</label>
             <input
               className="new deck"
               placeholder="question"
               type="text"
-              name="flashcard"
+              name="flashcard2Q"
             ></input>
             <input
               className="new deck"
               placeholder="answer"
               type="text"
-              name="flashcard"
+              name="flashcard2A"
             ></input>
             <label htmlFor="flashcards">Card 3</label>
             <input
               className="new deck"
               placeholder="question"
               type="text"
-              name="flashcard"
+              name="flashcard3Q"
             ></input>
             <input
               className="new deck"
               placeholder="answer"
               type="text"
-              name="flashcard"
+              name="flashcard3A"
             ></input>
             <label htmlFor="flashcards">Card 4</label>
             <input
               className="new deck"
               placeholder="question"
               type="text"
-              name="flashcard"
+              name="flashcard4Q"
             ></input>
             <input
               className="new deck"
               placeholder="answer"
               type="text"
-              name="flashcard"
+              name="flashcard4A"
             ></input>
             <label htmlFor="flashcards">Card 5</label>
             <input
               className="new deck"
               placeholder="question"
               type="text"
-              name="flashcard"
+              name="flashcard5Q"
             ></input>
             <input
               className="new deck"
               placeholder="answer"
               type="text"
-              name="flashcard"
+              name="flashcard5A"
             ></input>
             <button>Submit entire deck</button>
           </form>

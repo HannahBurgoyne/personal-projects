@@ -18,7 +18,7 @@ export interface FlashcardData {
 export interface NewDeck {
   deck_name: string
   author: string
-  flashcards: Flashcard[]
+  flashcards: NewFlashcard[]
 }
 
 export interface Deck extends NewDeck {
