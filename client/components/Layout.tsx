@@ -1,33 +1,19 @@
 import { Outlet } from 'react-router-dom'
+import Footer from './Footer'
 // This is the layout everything sits upon
 // Outlet goes in here
 
 function Layout() {
   return (
+    <>
     <main>
-      <p>This is the layout</p>
-      <h1>Flashcards</h1>
-      <div id="parent-container">
-        <div className="column">
-          <div className="flashcard-design">
-            <a href="#">Topic 1</a>
-          </div>
-        </div>
-
-        <div className="column">
-          <div className="flashcard-design">
-            <a href="#">Topic 2</a>
-          </div>
-        </div>
-
-        <div className="column">
-          <div className="flashcard-design">
-            <a href="#">Topic 3</a>
-          </div>
-        </div>
-      </div>
+   
+        <p>This is the layout</p>
       <Outlet />
+ 
     </main>
+    <Footer/>
+    </>
   )
 }
 
