@@ -19,7 +19,7 @@ export async function addNewFlashcard(
   db = connection
 ): Promise<Flashcard> {
   const flashcardsData = flashcards.map((flashcard) => ({
-    number: flashcard.id,
+    number: flashcard.number,
     question: flashcard.question,
     answer: flashcard.answer,
   }))
@@ -33,7 +33,7 @@ export async function addNewFlashcardsToDeck(
 ) {
   const flashcardsData = flashcards.map((flashcard) => ({
     deck_id: id,
-    flashcard_id: flashcard.id,
+    flashcard_id: flashcard.number,
   }))
 
   await db('joining_table').insert(flashcardsData)
@@ -55,7 +55,6 @@ export async function addNewFlashcardsToDeck(
 //   )
 // }
 
-
 export async function deleteDeckAndFlashcards(deckId: number, db = connection) {
   try {
     await db.transaction(async (trx) => {
@@ -65,19 +64,13 @@ export async function deleteDeckAndFlashcards(deckId: number, db = connection) {
         .pluck('flashcard_id')
 
       // delete rows in junction table
-      await trx('deck-flashcards')
-        .where('deck_id', deckId)
-        .del()
+      await trx('deck-flashcards').where('deck_id', deckId).del()
 
       // delete deck
-      await trx('decks')
-        .where('id', deckId)
-        .del()
+      await trx('decks').where('id', deckId).del()
 
-      // delete flashcards 
-      await trx('flashcards')
-        .whereIn('id', flashcardIds)
-        .del()
+      // delete flashcards
+      await trx('flashcards').whereIn('id', flashcardIds).del()
     })
   } catch (error) {
     console.error('Error deleting deck and flashcards:', error)
@@ -120,7 +113,6 @@ export function getAllFlashcards(
       'flashcards.*'
     )
 }
-
 
 // function to delete a flashcard from a deck - call the flashcards, decks, and deck-flashcards db
 export function deleteFlashcard(
