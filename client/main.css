@@ -35,6 +35,43 @@ a {
   line-height: 220px;
 }
 
+.library-container {
+  display: flex;
+  flex-direction: row;
+  padding: 5%;
+}
+
+.deck-container {
+  border: solid 2px black;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  padding: 20px;
+  background-color: white;
+
+}
+
+.deck-content {
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background-color: transparent;
+}
+
+.deck-title, .deck-author {
+  background-color: transparent;
+}
+
+.deck-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+}
+
 .flashcard-design:hover {
   background-color: rgb(254, 231, 235);
 }

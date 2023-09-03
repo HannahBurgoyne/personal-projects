@@ -21,10 +21,20 @@ function DeckLibrary() {
         {data &&
           data.map((deck) => (
             <>
-              <div key={`flashcard ${deck.id}`}>
-                <h2 key={`name ${deck.id}`}>{deck.deck_name}</h2>
-                <h4 key={`author ${deck.id}`}>{deck.author}</h4>
-                <button onClick={showFlashcards}>Use deck</button>
+              <div className="library-container">
+                <div key={`flashcard ${deck.id}`} className="deck-container">
+                  <div className="deck-content">
+                    <h2 className="deck-title" key={`name ${deck.id}`}>
+                      {deck.deck_name}
+                    </h2>
+                    <h4 className="deck-author" key={`author ${deck.id}`}>
+                      {deck.author}
+                    </h4>
+                    <button className="deck-button" onClick={showFlashcards}>
+                      Use deck
+                    </button>
+                  </div>
+                </div>
 
                 {useFlashcards ? (
                   <>
