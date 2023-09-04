@@ -6,13 +6,10 @@ import Footer from './Footer'
 function Layout() {
   return (
     <>
-    <main>
-   
-        <p>This is the layout</p>
-      <Outlet />
- 
-    </main>
-    <Footer/>
+      <main className="page-container">
+        <Outlet />
+      </main>
+      <Footer />
     </>
   )
 }
