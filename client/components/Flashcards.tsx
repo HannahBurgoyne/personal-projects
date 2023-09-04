@@ -19,7 +19,7 @@ function Flashcards(props: Props) {
     fetchDeck(deckId)
   )
   const [counter, setCounter] = useState(0)
-  const [isFlipped, setIsFlipped] = useState(false)
+  // const [isFlipped, setIsFlipped] = useState(false)
   const [clickEnabled, setClickEnabled] = useState(true)
   // const [currentCard, setCurrentCard] = useState({} as)
 
@@ -78,12 +78,12 @@ function Flashcards(props: Props) {
 
   console.log(shuffledCards)
 
-  function flipCard() {
-    if (clickEnabled) {
-      setIsFlipped(!isFlipped)
-      setClickEnabled(false)
-    }
-  }
+  // function flipCard() {
+  //   if (clickEnabled) {
+  //     setIsFlipped(!isFlipped)
+  //     // setClickEnabled(false)
+  //   }
+  // }
 
   function nextCard() {
     if (counter == 4) {
@@ -92,7 +92,7 @@ function Flashcards(props: Props) {
       setCounter((prevCounter) => prevCounter + 1)
       console.log(counter)
     }
-    setIsFlipped(false)
+    // setIsFlipped(false)
     setClickEnabled(true)
   }
 
@@ -108,7 +108,7 @@ function Flashcards(props: Props) {
         <p>Error fetching data</p>
       ) : shuffledCards.length > 0 ? (
         <>
-          {currentCard && <Card {...{ flipCard, isFlipped, currentCard }} />}
+          {currentCard && <Card currentCard={currentCard} />}
           <button onClick={nextCard}>Next card</button>
         </>
       ) : (

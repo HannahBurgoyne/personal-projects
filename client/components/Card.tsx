@@ -1,13 +1,18 @@
+import { useState } from 'react'
 import { FlashcardData } from '../../models/models'
 
 interface Props {
-  flipCard: () => void
-  isFlipped: boolean
+  // flipCard: () => void
   currentCard: FlashcardData
 }
 
 function Card(props: Props) {
-  const { isFlipped, currentCard, flipCard } = props
+  const [isFlipped, setIsFlipped] = useState(false)
+  const { currentCard } = props
+
+  function flipCard() {
+    setIsFlipped(!isFlipped)
+  }
 
   return (
     <div className="parent-flashcards-container">
@@ -18,7 +23,6 @@ function Card(props: Props) {
       </div>
       <div className="instructions">
         <p>Click on a card to reveal the answer</p>
-        <p>Use the left and right arrow keys to navigate through the cards</p>
       </div>
     </div>
   )
