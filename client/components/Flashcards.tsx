@@ -35,16 +35,22 @@ function Flashcards(props: Props) {
     shuffledCards = randomizeCards(data)
   }
 
+  console.log(shuffledCards)
+
   function flipCard() {
     setIsFlipped(!isFlipped)
   }
 
   function nextCard() {
     setCounter((prevCounter) => (prevCounter + 1) % shuffledCards.length)
+    if (counter >= 5) {
+      setCounter(0)
+    }
     setIsFlipped(false)
   }
 
   const currentCard = shuffledCards[counter]
+  console.log(currentCard)
 
   return (
     <>
