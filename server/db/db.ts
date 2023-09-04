@@ -38,22 +38,6 @@ export async function addNewFlashcardsToDeck(
 
   await db('joining_table').insert(flashcardsData)
 }
-// // function to delete a deck - call the decks db
-// export function deleteDeck(deckId: number, db = connection): Promise<Deck[]> {
-//   return db<Flashcard>('flashcards').join(
-//     'joining_table',
-//     'flashcards.number',
-//     '=',
-//     'joining_table.flashcard_id'
-//   )
-//   .join('decks', 'joining_table.deck_id', '=', 'decks.id')
-//   .where('deckId', deckId)
-//   .where('flashcardId', )
-//   .del(
-//     'flashcards.number',
-//     'decks.id'
-//   )
-// }
 
 export async function deleteDeckAndFlashcards(deckId: number, db = connection) {
   try {

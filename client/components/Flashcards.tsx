@@ -21,19 +21,19 @@ function Flashcards(props: Props) {
   const [isFlipped, setIsFlipped] = useState(false)
 
   //--- function to randomise deck ---//
-  // function randomizeCards(data: FlashcardData[]) {
-  //   const shuffledDeck = data.sort(function () {
-  //     return Math.random() - 0.5
-  //   })
-  //   return shuffledDeck
-  // }
+  function randomizeCards(data: FlashcardData[]) {
+    const shuffledDeck = data.sort(function () {
+      return Math.random() - 0.5
+    })
+    return shuffledDeck
+  }
 
   let shuffledCards: FlashcardData[] = []
 
-  // if (!isLoading && !isError && data) {
-  //   // Only shuffle the cards when data is available and there are no errors
-  //   shuffledCards = randomizeCards(data)
-  // }
+  if (!isLoading && !isError && data) {
+    // Only shuffle the cards when data is available and there are no errors
+    shuffledCards = randomizeCards(data)
+  }
 
   function flipCard() {
     setIsFlipped(!isFlipped)

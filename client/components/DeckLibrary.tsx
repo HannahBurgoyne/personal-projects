@@ -22,7 +22,7 @@ function DeckLibrary() {
   }
 
   return (
-    <div>
+    <div className="parent-deck-library">
       {data &&
         data.map((deck) => (
           <>

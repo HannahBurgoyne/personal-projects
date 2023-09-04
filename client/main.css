@@ -57,10 +57,19 @@ a {
   width: 50px;
 }
 
+.parent-deck-library {
+  display: flex;
+  padding: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
 .library-container {
   display: flex;
-  flex-direction: row;
-  padding: 5%;
+  flex-direction: column;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .deck-container {
@@ -68,6 +77,8 @@ a {
   border-radius: 20px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: fit-content;
   padding: 20px;
   background-color: white;
@@ -79,6 +90,7 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  text-align: center;
   border-radius: 20px;
   background-color: transparent;
 }
