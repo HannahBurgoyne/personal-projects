@@ -15,17 +15,16 @@ export function addNewDeck(newDeck: NewDeck, db = connection): Promise<Deck[]> {
 
 // function to add a new flashcard to a deck - call the flashcards, decks, and deck-flashcards db
 export async function addNewFlashcard(
-  flashcards: Flashcard[],
+  flashcards: NewFlashcard[],
   db = connection
 ) {
   const flashcardsData = flashcards.map((flashcard) => ({
-    number: flashcard.number,
     question: flashcard.question,
     answer: flashcard.answer,
   }))
-  console.log('db flashdata', flashcardsData)
+  // console.log('db flashdata', flashcardsData)
 
-  return db<Flashcard>('flashcards').insert(flashcardsData).returning('')
+  return db<Flashcard>('flashcards').insert(flashcardsData).returning('id')
 }
 
 // function to add flashcard ids and deck id to junction db
@@ -33,9 +32,13 @@ export async function addNewFlashcardsToDeck(
   { id, flashcards }: Deck,
   db = connection
 ) {
-  const flashcardsData = flashcards.map((flashcard) => ({
+  // console.log('db flashcards', flashcards)
+  const addFlash = await addNewFlashcard(flashcards)
+  console.log('db addFlash: ', addFlash)
+
+  const flashcardsData = addFlash.map((flashcard) => ({
     deck_id: id,
-    flashcard_id: flashcard.number,
+    flashcard_id: flashcard.id,
   }))
 
   await db('joining_table').insert(flashcardsData)
@@ -85,16 +88,11 @@ export function getAllFlashcards(
   db = connection
 ): Promise<Flashcard[]> {
   return db<Flashcard>('flashcards')
-    .join(
-      'joining_table',
-      'flashcards.number',
-      '=',
-      'joining_table.flashcard_id'
-    )
+    .join('joining_table', 'flashcards.id', '=', 'joining_table.flashcard_id')
     .join('decks', 'joining_table.deck_id', '=', 'decks.id')
     .where('deckId', deckId)
     .select(
-      'flashcards.number as flashcardId',
+      'flashcards.id as flashcardId',
       'decks.id as deckId',
       'flashcards.*'
     )

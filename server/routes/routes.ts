@@ -7,7 +7,7 @@ import {
   getAllDecks,
   getAllFlashcards,
 } from '../db/db'
-import { Deck, Flashcard } from '../../models/models'
+import { Deck, Flashcard, NewFlashcard } from '../../models/models'
 
 const router = express.Router()
 
@@ -31,7 +31,7 @@ router.post('/:deckId', async (req, res) => {
       id: Number(req.params.deckId),
       deck_name: deck_name,
       author: author,
-      flashcards: flashcards as Flashcard[],
+      flashcards: flashcards as NewFlashcard[],
     }
 
     const newDeck = {
@@ -39,13 +39,16 @@ router.post('/:deckId', async (req, res) => {
       author,
     }
     console.log({ newDeck })
+    // Add new deck
     await addNewDeck(newDeck)
     console.log({ flashcards })
     // This db func is not working
+    // Add new flashcards
     await addNewFlashcard(flashcards)
-    console.log({ deckFlashcardsData })
+    // add new join table entry
 
     await addNewFlashcardsToDeck(deckFlashcardsData)
+    console.log({ deckFlashcardsData })
 
     res.sendStatus(201)
   } catch (error) {
