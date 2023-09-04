@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { FlashcardData } from '../../models/models'
 
 interface Props {
-  // flipCard: () => void
   currentCard: FlashcardData
 }
 

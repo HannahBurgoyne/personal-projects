@@ -19,22 +19,7 @@ function Flashcards(props: Props) {
     fetchDeck(deckId)
   )
   const [counter, setCounter] = useState(0)
-  // const [isFlipped, setIsFlipped] = useState(false)
   const [clickEnabled, setClickEnabled] = useState(true)
-  // const [currentCard, setCurrentCard] = useState({} as)
-
-  // function handleKeyDown(e) {
-  //   console.log('working')
-  //   if (e.key === 'ArrowRight') {
-  //     console.log(e.key)
-  //     nextCard()
-  //   }
-
-  //   if (e.key === 'ArrowLeft') {
-  //     console.log(e.key)
-  //     nextCard()
-  //   }
-  // }
 
   let shuffledCards: FlashcardData[] = []
 
@@ -47,24 +32,6 @@ function Flashcards(props: Props) {
     shuffledCards = shuffledIndexes.map((index) => data[index])
   }
 
-  // useEffect(() => {
-  //   console.log('use effect')
-  //   const handleKeyDown = (e) => {
-  //     if (data && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {
-  //       nextCard()
-  //     }
-  //   }
-
-  //   // Add a condition to check if data is available
-
-  //   window.addEventListener('keydown', handleKeyDown)
-
-  //   // Remove the event listener when the component unmounts
-  //   return () => {
-  //     window.removeEventListener('keydown', handleKeyDown)
-  //   }
-  // }, [])
-
   //--- function to randomise deck ---//
   function randomizeCards(cards: any[]) {
     const shuffledDeck = [...cards].sort(() => Math.random() - 0.5)
@@ -76,15 +43,6 @@ function Flashcards(props: Props) {
     shuffledCards = randomizeCards(data)
   }
 
-  console.log(shuffledCards)
-
-  // function flipCard() {
-  //   if (clickEnabled) {
-  //     setIsFlipped(!isFlipped)
-  //     // setClickEnabled(false)
-  //   }
-  // }
-
   function nextCard() {
     if (counter == 4) {
       setCounter(0)
@@ -92,13 +50,11 @@ function Flashcards(props: Props) {
       setCounter((prevCounter) => prevCounter + 1)
       console.log(counter)
     }
-    // setIsFlipped(false)
     setClickEnabled(true)
   }
 
   const currentCard = shuffledCards[counter]
   console.log('current', currentCard)
-  // console.log('shuffled', shuffledCards)
 
   return (
     <>
