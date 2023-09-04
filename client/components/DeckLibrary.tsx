@@ -35,33 +35,36 @@ function DeckLibrary() {
           <div className="decks">
             {data &&
               data.map((deck) => (
-                <div className="library-container">
-                  <div key={`deck ${deck.id}`} className="deck-container">
-                    <div className="deck-content">
-                      <h2 className="deck-title" key={`name ${deck.id}`}>
-                        {deck.deck_name}
-                      </h2>
-                      <h4 className="deck-author" key={`author ${deck.id}`}>
-                        {deck.author}
-                      </h4>
-                      <button
-                        className="deck-button"
-                        onClick={() => showFlashcards(deck.id)}
-                      >
-                        Use deck
-                      </button>
+                <>
+                  <div className="library-container">
+                    <div key={`deck ${deck.id}`} className="deck-container">
+                      <div className="deck-content">
+                        <h2 className="deck-title" key={`name ${deck.id}`}>
+                          {deck.deck_name}
+                        </h2>
+                        <h4 className="deck-author" key={`author ${deck.id}`}>
+                          {deck.author}
+                        </h4>
+                        <button
+                          className="deck-button"
+                          onClick={() => showFlashcards(deck.id)}
+                        >
+                          Use deck
+                        </button>
+                        {/* <button>Go to deck library</button> */}
+                      </div>
                     </div>
                   </div>
-                </div>
+                </>
               ))}
+            <div className="add-new-container">
+              <button onClick={showAddForm} className="add-deck-btn">
+                Add new deck
+              </button>
+            </div>
           </div>
         </>
       )}
-      <div className="add-new-container">
-        <button onClick={showAddForm} className="add-deck-btn">
-          Add new deck
-        </button>
-      </div>
     </div>
   )
 }

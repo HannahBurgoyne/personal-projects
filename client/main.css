@@ -1,3 +1,5 @@
+
+
 * {
   background-color: rgb(85, 51, 117);
 }
@@ -17,6 +19,7 @@ a {
 p {
   background-color: transparent;
   color: white;
+  font-family: sans-serif;
 }
 
 button {
@@ -55,7 +58,8 @@ footer {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  font-size: 15px;
+  font-size: 13px;
+  font-family: sans-serif;
 }
 
 .logo {
@@ -69,6 +73,13 @@ footer {
 
 }
 
+.parent-flashcards-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .home-flashcard {
   background-color: rgb(168, 71, 213);
   width: 150px;
@@ -76,6 +87,16 @@ footer {
   border-radius: 25px;
   padding: 5px;
   box-shadow: 10px 10px rgb(90, 0, 128);
+}
+
+.instructions {
+  display: flex;
+  flex-direction: column ;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 15px;
+  font-family: sans-serif;
 }
 
 
@@ -197,9 +218,6 @@ footer {
   background-color: transparent;
 }
 
-.add-deck-btn {
-  
-}
 
 .flashcard-design:hover {
   background-color: rgb(254, 231, 235);

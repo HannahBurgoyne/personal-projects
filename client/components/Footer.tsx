@@ -1,7 +1,7 @@
 function Footer() {
   return (
     <footer>
-      <p>A project by Hannah Burgoyne</p>
+      A project by Hannah Burgoyne
       <div className="logo-container">
         <a href="https://github.com/HannahBurgoyne">
           <img

@@ -5,6 +5,7 @@ import { useQuery } from '@tanstack/react-query'
 import { fetchDeck } from '../apiClient'
 import { FlashcardData } from '../../models/models'
 import { useEffect, useState } from 'react'
+import Card from './Card'
 
 interface Props {
   id: number
@@ -20,19 +21,20 @@ function Flashcards(props: Props) {
   const [counter, setCounter] = useState(0)
   const [isFlipped, setIsFlipped] = useState(false)
   const [clickEnabled, setClickEnabled] = useState(true)
+  // const [currentCard, setCurrentCard] = useState({} as)
 
-  function handleKeyDown(e) {
-    console.log('working')
-    if (e.key === 'ArrowRight') {
-      console.log(e.key)
-      nextCard()
-    }
+  // function handleKeyDown(e) {
+  //   console.log('working')
+  //   if (e.key === 'ArrowRight') {
+  //     console.log(e.key)
+  //     nextCard()
+  //   }
 
-    if (e.key === 'ArrowLeft') {
-      console.log(e.key)
-      nextCard()
-    }
-  }
+  //   if (e.key === 'ArrowLeft') {
+  //     console.log(e.key)
+  //     nextCard()
+  //   }
+  // }
 
   let shuffledCards: FlashcardData[] = []
 
@@ -45,23 +47,23 @@ function Flashcards(props: Props) {
     shuffledCards = shuffledIndexes.map((index) => data[index])
   }
 
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-        nextCard()
-      }
-    }
+  // useEffect(() => {
+  //   console.log('use effect')
+  //   const handleKeyDown = (e) => {
+  //     if (data && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {
+  //       nextCard()
+  //     }
+  //   }
 
-    // Add a condition to check if data is available
-    if (!isLoading && !isError && shuffledCards.length > 0) {
-      window.addEventListener('keydown', handleKeyDown)
-    }
+  //   // Add a condition to check if data is available
 
-    // Remove the event listener when the component unmounts
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [isLoading, isError, shuffledCards])
+  //   window.addEventListener('keydown', handleKeyDown)
+
+  //   // Remove the event listener when the component unmounts
+  //   return () => {
+  //     window.removeEventListener('keydown', handleKeyDown)
+  //   }
+  // }, [])
 
   //--- function to randomise deck ---//
   function randomizeCards(cards: any[]) {
@@ -84,10 +86,11 @@ function Flashcards(props: Props) {
   }
 
   function nextCard() {
-    setCounter((prevCounter) => (prevCounter + 1) % shuffledCards.length)
-    console.log(counter)
-    if (counter >= 5) {
+    if (counter == 4) {
       setCounter(0)
+    } else {
+      setCounter((prevCounter) => prevCounter + 1)
+      console.log(counter)
     }
     setIsFlipped(false)
     setClickEnabled(true)
@@ -105,12 +108,8 @@ function Flashcards(props: Props) {
         <p>Error fetching data</p>
       ) : shuffledCards.length > 0 ? (
         <>
-          <div className="flashcard-container" onClick={flipCard}>
-            <div className="flashcard-content">
-              {isFlipped ? currentCard.answer : currentCard.question}
-            </div>
-          </div>
-          <p>This is the page where you can use the flashcards</p>
+          {currentCard && <Card {...{ flipCard, isFlipped, currentCard }} />}
+          <button onClick={nextCard}>Next card</button>
         </>
       ) : (
         <p>No flashcards available</p>
