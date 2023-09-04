@@ -11,7 +11,6 @@ function DeckLibrary() {
   const [useFlashcards, setUseFlashcards] = useState(false)
   const [showAdd, setShowAdd] = useState(false)
 
-  // have an onclick function to show flashcards for the deck you click on
 
   function showFlashcards() {
     setUseFlashcards(!false)

@@ -106,6 +106,28 @@ a {
   width: fit-content;
 }
 
+.flashcard-container {
+  border: solid 2px black;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  padding: 20px;
+  background-color: white;
+} 
+
+.flashcard-content {
+  display: flex; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 20px;
+  background-color: transparent;
+}
+
 .add-deck-btn {
   
 }

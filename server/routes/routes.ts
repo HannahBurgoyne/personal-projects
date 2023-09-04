@@ -38,8 +38,13 @@ router.post('/:deckId', async (req, res) => {
       deck_name,
       author,
     }
+    console.log({ newDeck })
     await addNewDeck(newDeck)
+    console.log({ flashcards })
+    // This db func is not working
     await addNewFlashcard(flashcards)
+    console.log({ deckFlashcardsData })
+
     await addNewFlashcardsToDeck(deckFlashcardsData)
 
     res.sendStatus(201)
@@ -63,7 +68,7 @@ router.get('/:deckId', async (req, res) => {
   }
 })
 
-// DELETE A DECK AND ALL CORRESPONDING FLASHCARDS  
+// DELETE A DECK AND ALL CORRESPONDING FLASHCARDS
 router.delete('/:deckId', async (req, res) => {
   try {
     const deckId = Number(req.params.deckId)
@@ -102,8 +107,6 @@ router.delete('/:deckId', async (req, res) => {
 // })
 
 // FLASHCARDS ROUTES //
-
-
 
 // STRETCH
 // router.patch('/:flashcardId', async (req, res) => {

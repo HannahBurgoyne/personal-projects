@@ -17,13 +17,15 @@ export function addNewDeck(newDeck: NewDeck, db = connection): Promise<Deck[]> {
 export async function addNewFlashcard(
   flashcards: Flashcard[],
   db = connection
-): Promise<Flashcard> {
+) {
   const flashcardsData = flashcards.map((flashcard) => ({
     number: flashcard.number,
     question: flashcard.question,
     answer: flashcard.answer,
   }))
-  return db<Flashcard>('flashcards').insert(flashcardsData)
+  console.log('db flashdata', flashcardsData)
+
+  return db<Flashcard>('flashcards').insert(flashcardsData).returning('')
 }
 
 // function to add flashcard ids and deck id to junction db
