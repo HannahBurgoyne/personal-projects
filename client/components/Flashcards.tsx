@@ -19,6 +19,7 @@ function Flashcards(props: Props) {
   )
   const [counter, setCounter] = useState(0)
   const [isFlipped, setIsFlipped] = useState(false)
+  const [clickEnabled, setClickEnabled] = useState(true)
 
   function handleKeyDown(e) {
     console.log('working')
@@ -34,6 +35,16 @@ function Flashcards(props: Props) {
   }
 
   let shuffledCards: FlashcardData[] = []
+
+  if (!isLoading && !isError && data) {
+    // Create an array of card indexes and shuffle it
+    const cardIndexes = Array.from({ length: data.length }, (_, index) => index)
+    const shuffledIndexes = randomizeCards(cardIndexes)
+
+    // Use the shuffled indexes to reorder the cards while preserving the pairing
+    shuffledCards = shuffledIndexes.map((index) => data[index])
+  }
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
@@ -53,10 +64,8 @@ function Flashcards(props: Props) {
   }, [isLoading, isError, shuffledCards])
 
   //--- function to randomise deck ---//
-  function randomizeCards(data: FlashcardData[]) {
-    const shuffledDeck = data.sort(function () {
-      return Math.random() - 0.5
-    })
+  function randomizeCards(cards: any[]) {
+    const shuffledDeck = [...cards].sort(() => Math.random() - 0.5)
     return shuffledDeck
   }
 
@@ -68,7 +77,10 @@ function Flashcards(props: Props) {
   console.log(shuffledCards)
 
   function flipCard() {
-    setIsFlipped(!isFlipped)
+    if (clickEnabled) {
+      setIsFlipped(!isFlipped)
+      setClickEnabled(false)
+    }
   }
 
   function nextCard() {
@@ -78,11 +90,12 @@ function Flashcards(props: Props) {
       setCounter(0)
     }
     setIsFlipped(false)
+    setClickEnabled(true)
   }
 
   const currentCard = shuffledCards[counter]
   console.log('current', currentCard)
-  console.log('shuffled', shuffledCards)
+  // console.log('shuffled', shuffledCards)
 
   return (
     <>
