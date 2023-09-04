@@ -17,7 +17,13 @@ function Card(props: Props) {
     <div className="parent-flashcards-container">
       <div className="deck-container" onClick={flipCard}>
         <div className="deck-content">
-          {isFlipped ? currentCard.answer : currentCard.question}
+          {isFlipped ? (
+            <p className="card-text animate_animated animate__flipInY">
+              {currentCard.answer}
+            </p>
+          ) : (
+            <p className="card-text">{currentCard.question}</p>
+          )}
         </div>
       </div>
       <div className="instructions">
