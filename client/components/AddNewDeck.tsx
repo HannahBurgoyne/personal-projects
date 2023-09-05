@@ -4,9 +4,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Deck, NewDeck } from '../../models/models'
 import { addNewDeck } from '../apiClient'
+import { Link } from 'react-router-dom'
 
 interface Props {
   total: number
+  showAdd: boolean
 }
 
 function AddNewDeck(props: Props) {
@@ -78,7 +80,7 @@ function AddNewDeck(props: Props) {
               type="text"
               name="deckAuthor"
             ></input>
-            <h4 className='form-label'>Enter your flashcards</h4>
+            <h4 className="form-label">Enter your flashcards</h4>
             <label htmlFor="flashcards">Card 1</label>
             <input
               className="new deck"
@@ -144,7 +146,7 @@ function AddNewDeck(props: Props) {
               type="text"
               name="flashcard5A"
             ></input>
-            <button className='form-btn'>Submit entire deck</button>
+            <button className="form-btn">Submit entire deck</button>
           </form>
         </div>
       </div>

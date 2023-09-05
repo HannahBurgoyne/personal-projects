@@ -28,7 +28,7 @@ function DeckLibrary() {
         </section>
       ) : showAdd ? (
         <section className="add-deck-container">
-          <AddNewDeck total={data.length} />
+          <AddNewDeck total={data.length} showAdd={showAdd} />
         </section>
       ) : (
         <>
