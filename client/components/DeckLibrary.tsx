@@ -3,6 +3,7 @@ import { fetchAllDecks } from '../apiClient'
 import Flashcards from './Flashcards'
 import { useState } from 'react'
 import AddNewDeck from './AddNewDeck'
+import EditMode from './EditCard'
 // This is where the deck library lives
 // Sits inside layout
 
@@ -10,9 +11,9 @@ function DeckLibrary() {
   const { data } = useQuery(['deck'], fetchAllDecks)
   // const [useFlashcards, setUseFlashcards] = useState(false)
   const [showAdd, setShowAdd] = useState(false)
-  const [selectedDeckId, setSelectedDeckId] = useState(null)
+  const [selectedDeckId, setSelectedDeckId] = useState<number | null>(null)
 
-  function showFlashcards(deckId) {
+  function showFlashcards(deckId: number) {
     setSelectedDeckId(deckId)
   }
 
@@ -28,7 +29,7 @@ function DeckLibrary() {
         </section>
       ) : showAdd ? (
         <section className="add-deck-container">
-          <AddNewDeck total={data.length} showAdd={showAdd} />
+          <AddNewDeck total={data?.length} showAdd={showAdd} />
         </section>
       ) : (
         <>
