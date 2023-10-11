@@ -10,14 +10,32 @@ interface Props {
 
 function EditCard(props: Props) {
   const [isFlipped, setIsFlipped] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
 
   function flipCard() {
     setIsFlipped(!isFlipped)
   }
+
+  function editCard() {
+    setIsEditing(!isEditing)
+  }
+
+  function handleFormSubmit() {}
+
   return (
-    <div className="parent-flashcards-container">
+    <div className="edit-flashcards-container">
       <div className="deck-container" onClick={flipCard}>
-        <div className="deck-content">
+        <form onSubmit={handleFormSubmit} className="edit-card-form">
+          <input
+            type="text"
+            name="flashcard"
+            placeholder={props.card.question}
+          />
+          <input type="text" name="flashcard" placeholder={props.card.answer} />
+          <button>Save</button>
+        </form>
+
+        {/* 
           {isFlipped ? (
             <p className="card-text animate_animated animate__flipInY">
               {props.card.answer}
@@ -25,10 +43,7 @@ function EditCard(props: Props) {
           ) : (
             <p className="card-text">{props.card.question}</p>
           )}
-        </div>
-      </div>
-      <div className="instructions">
-        <p>Click on a card to reveal the answer</p>
+          {isEditing ? <p>Edit mode</p> : <p>not edit mode</p>} */}
       </div>
     </div>
   )
