@@ -1,5 +1,11 @@
 import request from 'superagent'
-import { Deck, Flashcard, FlashcardData, NewDeck } from '../models/models'
+import {
+  Deck,
+  Flashcard,
+  FlashcardData,
+  NewDeck,
+  NewFlashcard,
+} from '../models/models'
 
 const baseUrl = '/api/v1/flashcardsapp/'
 
@@ -19,4 +25,10 @@ export async function addNewDeck(deckId: number, deckData: NewDeck) {
 
 export async function deleteDeck(deckId: number) {
   await request.delete(`${baseUrl}${deckId}`)
+}
+
+export async function updateFlashcard(card: FlashcardData) {
+  const flashcardId = card.flashcardId
+  const deckId = card.deckId
+  await request.patch(`${baseUrl}${deckId}/${flashcardId}`).send(card)
 }

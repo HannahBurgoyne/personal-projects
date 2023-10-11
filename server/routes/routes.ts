@@ -6,6 +6,7 @@ import {
   deleteDeckAndFlashcards,
   getAllDecks,
   getAllFlashcards,
+  updateFlashcard,
 } from '../db/db'
 import { Deck, Flashcard, NewFlashcard } from '../../models/models'
 
@@ -77,6 +78,19 @@ router.delete('/:deckId', async (req, res) => {
     const deckId = Number(req.params.deckId)
     await deleteDeckAndFlashcards(deckId)
     res.sendStatus(200)
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(500).send(error.message)
+    }
+  }
+})
+
+// UPDATE A FLASHCARD WITHIN A DECK
+router.patch('/:deckId/:flashcardId', async (req, res) => {
+  try {
+    const flashcardId = Number(req.params.flashcardId)
+    const updatedFlashcard = req.body
+    await updateFlashcard(flashcardId, updatedFlashcard)
   } catch (error) {
     if (error instanceof Error) {
       res.status(500).send(error.message)
