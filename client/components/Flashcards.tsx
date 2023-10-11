@@ -6,9 +6,10 @@ import { fetchDeck } from '../apiClient'
 import { FlashcardData } from '../../models/models'
 import { useEffect, useState } from 'react'
 import Card from './Card'
+import EditCard from './EditCard'
 
 interface Props {
-  id: number
+  id: number | null
 }
 
 function Flashcards(props: Props) {
@@ -16,10 +17,15 @@ function Flashcards(props: Props) {
   const queryKey = ['flashcards', deckId]
 
   const { data, isLoading, isError } = useQuery(queryKey, () =>
-    fetchDeck(deckId)
+    fetchDeck(deckId as number)
   )
   const [counter, setCounter] = useState(0)
   const [clickEnabled, setClickEnabled] = useState(true)
+  const [showEdit, setShowEdit] = useState(false)
+
+  function showEditPage() {
+    setShowEdit(!showEdit)
+  }
 
   let shuffledCards: FlashcardData[] = []
 
@@ -58,7 +64,9 @@ function Flashcards(props: Props) {
 
   return (
     <>
-      {isLoading ? (
+      {showEdit ? (
+        data?.map((card) => <EditCard card={card} />)
+      ) : isLoading ? (
         <p>Loading...</p>
       ) : isError ? (
         <p>Error fetching data</p>
@@ -66,6 +74,9 @@ function Flashcards(props: Props) {
         <>
           {currentCard && <Card currentCard={currentCard} />}
           <button onClick={nextCard}>Next card</button>
+          <button onClick={showEditPage} className="add-deck-btn">
+            Edit deck
+          </button>
         </>
       ) : (
         <p>No flashcards available</p>
@@ -73,36 +84,5 @@ function Flashcards(props: Props) {
     </>
   )
 }
-//--- variables ---//
-// let counter = 0
-// let activeCard = document.getElementById('active-flashcard')
-// let cardContent = document.getElementById('card-content')
-// let shuffledDeck = randomizeCards(frenchVocab)
-
-// // computer takes the shuffled deck, and iterates through it
-// shuffledDeck.forEach((card) => {
-//   cardContent.textContent = shuffledDeck[counter].q
-//   activeCard.addEventListener('click', flipCard)
-// })
-// //--- function to flip the card ---//
-// function flipCard() {
-//   cardContent.textContent = shuffledDeck[counter].a
-// }
-// //--- function to go to next card ---//
-// function nextCard() {
-//   counter += 1
-//   if (counter >= 5) {
-//     counter = 0
-//   }
-//   cardContent.textContent = shuffledDeck[counter].q
-// }
-// //--- event listeners ---//
-// document.addEventListener('keydown', function (evt) {
-//   if (evt.key == 'ArrowRight') {
-//     nextCard()
-//   } else if (evt.key == 'ArrowLeft') {
-//     nextCard()
-//   }
-// })
 
 export default Flashcards
