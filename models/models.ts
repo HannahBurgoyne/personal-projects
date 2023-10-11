@@ -27,9 +27,9 @@ export interface NewFlashcard {
   answer: string
 }
 
-// export interface Flashcard extends NewFlashcard {
-//   number: number
-// }
+export interface Flashcard extends NewFlashcard {
+  number: number
+}
 
 export interface FlashcardData {
   flashcardId: number
