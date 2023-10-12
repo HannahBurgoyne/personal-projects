@@ -3,6 +3,7 @@ import {
   Deck,
   Flashcard,
   FlashcardData,
+  FlashcardInfo,
   NewDeck,
   NewFlashcard,
 } from '../models/models'
@@ -31,4 +32,10 @@ export async function updateFlashcard(card: FlashcardData) {
   const flashcardId = card.flashcardId
   const deckId = card.deckId
   await request.patch(`${baseUrl}${deckId}/${flashcardId}`).send(card)
+}
+
+export async function deleteCard(data: FlashcardInfo) {
+  const flashcardId = data.flashcardId
+  const deckId = data.deckId
+  await request.delete(`${baseUrl}${deckId}/${flashcardId}`)
 }

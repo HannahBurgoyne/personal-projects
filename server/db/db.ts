@@ -104,13 +104,9 @@ export function deleteFlashcard(
   db = connection
 ): Promise<Flashcard[]> {
   return db<Flashcard>('flashcards')
-    .join(
-      'joining_table',
-      'flashcards.number as flashcardId',
-      'joining_table.flashcard_id'
-    )
-    .join('decks', 'joining_table.deck_id', 'deck.id as deckId')
-    .where('flashcardId', flashcardId)
+    .join('joining_table', 'flashcards.id', 'joining_table.flashcard_id')
+    .where('flashcards.id', flashcardId)
+    .where('joining_table.flashcard_id', flashcardId)
     .del()
 }
 // function to update a flashcard in a deck - call the flashcards, decks, and deck-flashcards db

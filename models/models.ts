@@ -31,9 +31,12 @@ export interface Flashcard extends NewFlashcard {
   number: number
 }
 
-export interface FlashcardData {
-  flashcardId: number
+export interface FlashcardInfo {
   deckId: number
+  flashcardId: number
+}
+
+export interface FlashcardData extends FlashcardInfo {
   number: number
   question: string
   answer: string

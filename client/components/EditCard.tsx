@@ -1,10 +1,10 @@
 // This contains an edit mode for any deck
 // Shows you all the flashcards in your deck, and the option to edit or delete each one
 
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { FlashcardData, NewFlashcard } from '../../models/models'
 import { useQueryClient, useMutation } from '@tanstack/react-query'
-import { updateFlashcard } from '../apiClient'
+import { deleteCard, updateFlashcard } from '../apiClient.tsx'
 
 interface Props {
   card: FlashcardData
@@ -20,6 +20,26 @@ function EditCard(props: Props) {
       queryClient.invalidateQueries(['flashcards'])
     },
   })
+
+  const deleteMutation = useMutation({
+    mutationFn: (flashcardData: FlashcardData) => deleteCard(flashcardData),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['flashcards'])
+    },
+  })
+
+  function handleDelClick(
+    e: React.MouseEvent<HTMLButtonElement>,
+    flashcardId: number
+  ) {
+    e.preventDefault()
+    const deckId = props.card.deckId
+    const data = {
+      deckId: deckId,
+      flashcardId: flashcardId,
+    }
+    deleteMutation.mutate(flashcardId)
+  }
 
   function handleFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -56,6 +76,9 @@ function EditCard(props: Props) {
           />
           <button>Save</button>
         </form>
+        <button onClick={(e) => handleDelClick(e, props.card.flashcardId)}>
+          Delete
+        </button>
       </div>
     </div>
   )
