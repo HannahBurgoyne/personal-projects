@@ -91,6 +91,7 @@ router.patch('/:deckId/:flashcardId', async (req, res) => {
     const flashcardId = Number(req.params.flashcardId)
     const updatedFlashcard = req.body
     await updateFlashcard(flashcardId, updatedFlashcard)
+    res.sendStatus(200)
   } catch (error) {
     if (error instanceof Error) {
       res.status(500).send(error.message)

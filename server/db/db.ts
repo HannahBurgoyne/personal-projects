@@ -116,16 +116,11 @@ export function deleteFlashcard(
 // function to update a flashcard in a deck - call the flashcards, decks, and deck-flashcards db
 export function updateFlashcard(
   flashcardId: number,
-  updatedFlashcard: NewFlashcard,
+  updatedFlashcard: Flashcard,
   db = connection
 ): Promise<Flashcard[]> {
-  return db<Flashcard>('flashcards')
-    .join(
-      'joining_table',
-      'flashcards.number as flashcardId',
-      'joining_table.flashcard_id'
-    )
-    .join('decks', 'joining_table.deck_id', 'deck.id as deckId')
-    .where('flashcardId', flashcardId)
-    .update(updatedFlashcard)
+  return db<Flashcard>('flashcards').where('id', flashcardId).update({
+    question: updatedFlashcard.question,
+    answer: updatedFlashcard.answer,
+  })
 }
