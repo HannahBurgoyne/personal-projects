@@ -99,16 +99,33 @@ export function getAllFlashcards(
 }
 
 // function to delete a flashcard from a deck - call the flashcards, decks, and deck-flashcards db
+// export function deleteFlashcard(
+//   flashcardId: number,
+//   db = connection
+// ): Promise<Flashcard[]> {
+//   return (
+//     db<Flashcard>('flashcards')
+//       .join('joining_table', 'flashcards.id', 'joining_table.flashcard_id')
+//       .where('flashcards.id', flashcardId)
+//       // .where('joining_table.flashcard_id', flashcardId)
+//       .del()
+//   )
+// }
+
 export function deleteFlashcard(
   flashcardId: number,
   db = connection
 ): Promise<Flashcard[]> {
-  return db<Flashcard>('flashcards')
-    .join('joining_table', 'flashcards.id', 'joining_table.flashcard_id')
-    .where('flashcards.id', flashcardId)
-    .where('joining_table.flashcard_id', flashcardId)
-    .del()
+  return db.transaction((trx) => {
+    return trx('joining_table')
+      .where('flashcard_id', flashcardId)
+      .del()
+      .then(() => {
+        return trx('flashcards').where('id', flashcardId).del()
+      })
+  })
 }
+
 // function to update a flashcard in a deck - call the flashcards, decks, and deck-flashcards db
 export function updateFlashcard(
   flashcardId: number,
