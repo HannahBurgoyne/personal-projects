@@ -5,6 +5,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Deck, NewDeck } from '../../models/models'
 import { addNewDeck } from '../apiClient'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
 // interface Props {
 //   total: number | undefined
@@ -13,148 +14,198 @@ import { Link } from 'react-router-dom'
 
 function AddNewDeck() {
   const queryClient = useQueryClient()
+  const [inputFields, setInputFields] = useState([{ question: '', answer: '' }])
 
-  if (props.total) {
-    const number = props.total + 1
+  // if (props.total) {
+  //   const number = props.total + 1
 
-    const addMutation = useMutation({
-      mutationFn: (newDeck: NewDeck) => addNewDeck(number, newDeck),
-      onSuccess: () => {
-        queryClient.invalidateQueries(['deck'])
-      },
-    })
+  const addMutation = useMutation({
+    mutationFn: (newDeck: Deck) => addNewDeck(newDeck),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['deck'])
+    },
+  })
 
-    function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-      e.preventDefault()
+  function handleFormChange(
+    index: number,
+    e: React.ChangeEvent<HTMLInputElement>
+  ) {
+    let inputData = [...inputFields]
+    inputData[index][e.target.name] = e.target.value
+    setInputFields(inputData)
+  }
 
-      const target = e.currentTarget
-      const form = new FormData(target)
+  function addInputField() {
+    let newField = { question: '', answer: '' }
 
-      const deckName = form.get('deckName')?.valueOf() as string
-      const deckAuthor = form.get('deckAuthor')?.valueOf() as string
-      const flashcard1Question = form.get('flashcard1Q')?.valueOf() as string
-      const flashcard1Answer = form.get('flashcard1A')?.valueOf() as string
-      const flashcard2Question = form.get('flashcard2Q')?.valueOf() as string
-      const flashcard2Answer = form.get('flashcard2A')?.valueOf() as string
-      const flashcard3Question = form.get('flashcard3Q')?.valueOf() as string
-      const flashcard3Answer = form.get('flashcard3A')?.valueOf() as string
-      const flashcard4Question = form.get('flashcard4Q')?.valueOf() as string
-      const flashcard4Answer = form.get('flashcard4A')?.valueOf() as string
-      const flashcard5Question = form.get('flashcard5Q')?.valueOf() as string
-      const flashcard5Answer = form.get('flashcard5A')?.valueOf() as string
+    setInputFields([...inputFields, newField])
+  }
 
-      const newDeck: Deck = {
-        id: number,
-        deck_name: deckName,
-        author: deckAuthor,
-        flashcards: [
-          {
-            number: 1,
-            question: flashcard1Question,
-            answer: flashcard1Answer,
-          },
-          { number: 2, question: flashcard2Question, answer: flashcard2Answer },
-          { number: 3, question: flashcard3Question, answer: flashcard3Answer },
-          { number: 4, question: flashcard4Question, answer: flashcard4Answer },
-          { number: 5, question: flashcard5Question, answer: flashcard5Answer },
-        ],
-      }
+  function removeInputField(index: number) {
+    let inputData = [...inputFields]
+    inputData.splice(index, 1)
+    setInputFields(inputData)
+  }
 
-      addMutation.mutate(newDeck)
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+
+    const target = e.currentTarget
+    const form = new FormData(target)
+
+    const deckName = form.get('deckName')?.valueOf() as string
+    const deckAuthor = form.get('deckAuthor')?.valueOf() as string
+    const flashcard1Question = form.get('flashcard1Q')?.valueOf() as string
+    const flashcard1Answer = form.get('flashcard1A')?.valueOf() as string
+    const flashcard2Question = form.get('flashcard2Q')?.valueOf() as string
+    const flashcard2Answer = form.get('flashcard2A')?.valueOf() as string
+    const flashcard3Question = form.get('flashcard3Q')?.valueOf() as string
+    const flashcard3Answer = form.get('flashcard3A')?.valueOf() as string
+    const flashcard4Question = form.get('flashcard4Q')?.valueOf() as string
+    const flashcard4Answer = form.get('flashcard4A')?.valueOf() as string
+    const flashcard5Question = form.get('flashcard5Q')?.valueOf() as string
+    const flashcard5Answer = form.get('flashcard5A')?.valueOf() as string
+
+    const newDeck: Deck = {
+      id: number,
+      deck_name: deckName,
+      author: deckAuthor,
+      flashcards: [
+        {
+          number: 1,
+          question: flashcard1Question,
+          answer: flashcard1Answer,
+        },
+        { number: 2, question: flashcard2Question, answer: flashcard2Answer },
+        { number: 3, question: flashcard3Question, answer: flashcard3Answer },
+        { number: 4, question: flashcard4Question, answer: flashcard4Answer },
+        { number: 5, question: flashcard5Question, answer: flashcard5Answer },
+      ],
     }
 
-    return (
-      <>
-        <div className="addformcontainer">
-          <h1>Add new deck</h1>
-          <div className="add-form">
-            <form onSubmit={handleSubmit}>
-              <label htmlFor="deck">Give your deck a name and author</label>
-              <input
-                className="new deck"
-                placeholder="deck name"
-                type="text"
-                name="deckName"
-              ></input>
-              <input
-                className="new deck"
-                placeholder="deck author"
-                type="text"
-                name="deckAuthor"
-              ></input>
-              <h4 className="form-label">Enter your flashcards</h4>
-              <label htmlFor="flashcards">Card 1</label>
-              <input
-                className="new deck"
-                placeholder="question "
-                type="text"
-                name="flashcard1Q"
-              ></input>
-              <input
-                className="new deck"
-                placeholder="answer "
-                type="text"
-                name="flashcard1A"
-              ></input>
-              <label htmlFor="flashcards">Card 2</label>
-              <input
-                className="new deck"
-                placeholder="question"
-                type="text"
-                name="flashcard2Q"
-              ></input>
-              <input
-                className="new deck"
-                placeholder="answer"
-                type="text"
-                name="flashcard2A"
-              ></input>
-              <label htmlFor="flashcards">Card 3</label>
-              <input
-                className="new deck"
-                placeholder="question"
-                type="text"
-                name="flashcard3Q"
-              ></input>
-              <input
-                className="new deck"
-                placeholder="answer"
-                type="text"
-                name="flashcard3A"
-              ></input>
-              <label htmlFor="flashcards">Card 4</label>
-              <input
-                className="new deck"
-                placeholder="question"
-                type="text"
-                name="flashcard4Q"
-              ></input>
-              <input
-                className="new deck"
-                placeholder="answer"
-                type="text"
-                name="flashcard4A"
-              ></input>
-              <label htmlFor="flashcards">Card 5</label>
-              <input
-                className="new deck"
-                placeholder="question"
-                type="text"
-                name="flashcard5Q"
-              ></input>
-              <input
-                className="new deck"
-                placeholder="answer"
-                type="text"
-                name="flashcard5A"
-              ></input>
-              <button className="form-btn">Submit entire deck</button>
-            </form>
-          </div>
-        </div>
-      </>
-    )
+    addMutation.mutate(newDeck)
   }
+
+  return (
+    <>
+      <div className="addformcontainer">
+        <h1>Add new deck</h1>
+        <div className="add-form">
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="deck">Give your deck a name and author</label>
+            <input
+              className="new deck"
+              placeholder="deck name"
+              type="text"
+              name="deckName"
+            ></input>
+            <input
+              className="new deck"
+              placeholder="deck author"
+              type="text"
+              name="deckAuthor"
+            ></input>
+            <label htmlFor="flashcardsNo">
+              How many flashcards do you need?
+            </label>
+
+            <h4 className="form-label">Enter your flashcards</h4>
+            {inputFields.map((input, index) => (
+              <>
+                <input
+                  key={`input-q ${index}`}
+                  name="question"
+                  placeholder="question"
+                  value={input.question}
+                  onChange={(e) => handleFormChange(index, e)}
+                />
+                <input
+                  key={`input-a ${index}`}
+                  name="answer"
+                  placeholder="answer"
+                  value={input.answer}
+                  onChange={(e) => handleFormChange(index, e)}
+                />
+                <button onClick={() => removeInputField(index)}>
+                  Remove card
+                </button>
+              </>
+            ))}
+            <button onClick={addInputField}>Add card</button>
+
+            <label htmlFor="flashcards">Card 1</label>
+            <input
+              className="new deck"
+              placeholder="question "
+              type="text"
+              name="flashcard1Q"
+            ></input>
+            <input
+              className="new deck"
+              placeholder="answer "
+              type="text"
+              name="flashcard1A"
+            ></input>
+            <label htmlFor="flashcards">Card 2</label>
+            <input
+              className="new deck"
+              placeholder="question"
+              type="text"
+              name="flashcard2Q"
+            ></input>
+            <input
+              className="new deck"
+              placeholder="answer"
+              type="text"
+              name="flashcard2A"
+            ></input>
+            <label htmlFor="flashcards">Card 3</label>
+            <input
+              className="new deck"
+              placeholder="question"
+              type="text"
+              name="flashcard3Q"
+            ></input>
+            <input
+              className="new deck"
+              placeholder="answer"
+              type="text"
+              name="flashcard3A"
+            ></input>
+            <label htmlFor="flashcards">Card 4</label>
+            <input
+              className="new deck"
+              placeholder="question"
+              type="text"
+              name="flashcard4Q"
+            ></input>
+            <input
+              className="new deck"
+              placeholder="answer"
+              type="text"
+              name="flashcard4A"
+            ></input>
+            <label htmlFor="flashcards">Card 5</label>
+            <input
+              className="new deck"
+              placeholder="question"
+              type="text"
+              name="flashcard5Q"
+            ></input>
+            <input
+              className="new deck"
+              placeholder="answer"
+              type="text"
+              name="flashcard5A"
+            ></input>
+            <button className="form-btn" onSubmit={(e) => handleSubmit}>
+              Submit entire deck
+            </button>
+          </form>
+        </div>
+      </div>
+    </>
+  )
 }
 
 export default AddNewDeck

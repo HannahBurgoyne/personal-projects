@@ -19,9 +19,9 @@ function DeckLibrary() {
   //   setSelectedDeckId(deckId)
   // }
 
-  function showAddForm() {
-    setShowAdd(!showAdd)
-  }
+  // function showAddForm() {
+  //   setShowAdd(!showAdd)
+  // }
 
   return (
     <div className="parent-deck-library">
@@ -57,7 +57,7 @@ function DeckLibrary() {
             </>
           ))}
         <div className="add-new-container">
-          <button onClick={showAddForm} className="add-deck-btn">
+          <button onClick={() => navigate(`/add-new`)} className="add-deck-btn">
             Add new deck
           </button>
         </div>
