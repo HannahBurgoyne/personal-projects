@@ -7,17 +7,20 @@ import { FlashcardData } from '../../models/models'
 import { useEffect, useState } from 'react'
 import Card from './Card'
 import EditCard from './EditCard'
+import { useParams } from 'react-router-dom'
 
-interface Props {
-  id: number | null
-}
+// interface Props {
+//   id: number | null
+// }
 
-function Flashcards(props: Props) {
-  const deckId = props.id
+function Flashcards() {
+  const { deckId } = useParams()
+  const dataId = Number(deckId)
+
   const queryKey = ['flashcards', deckId]
 
   const { data, isLoading, isError } = useQuery(queryKey, () =>
-    fetchDeck(deckId as number)
+    fetchDeck(dataId)
   )
   const [counter, setCounter] = useState(0)
   const [clickEnabled, setClickEnabled] = useState(true)

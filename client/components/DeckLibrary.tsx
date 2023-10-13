@@ -4,18 +4,20 @@ import Flashcards from './Flashcards'
 import { useState } from 'react'
 import AddNewDeck from './AddNewDeck'
 import EditMode from './EditCard'
+import { useNavigate } from 'react-router-dom'
 // This is where the deck library lives
 // Sits inside layout
 
 function DeckLibrary() {
+  const navigate = useNavigate()
   const { data } = useQuery(['deck'], fetchAllDecks)
   // const [useFlashcards, setUseFlashcards] = useState(false)
   const [showAdd, setShowAdd] = useState(false)
-  const [selectedDeckId, setSelectedDeckId] = useState<number | null>(null)
+  // const [selectedDeckId, setSelectedDeckId] = useState<number | null>(null)
 
-  function showFlashcards(deckId: number) {
-    setSelectedDeckId(deckId)
-  }
+  // function showFlashcards(deckId: number) {
+  //   setSelectedDeckId(deckId)
+  // }
 
   function showAddForm() {
     setShowAdd(!showAdd)
@@ -23,11 +25,7 @@ function DeckLibrary() {
 
   return (
     <div className="parent-deck-library">
-      {selectedDeckId ? (
-        <section className="use-flashcards-container">
-          <Flashcards id={selectedDeckId} />
-        </section>
-      ) : showAdd ? (
+      {showAdd ? (
         <section className="add-deck-container">
           <AddNewDeck total={data?.length} showAdd={showAdd} />
         </section>
@@ -48,7 +46,7 @@ function DeckLibrary() {
                         </h4>
                         <button
                           className="deck-button"
-                          onClick={() => showFlashcards(deck.id)}
+                          onClick={() => navigate(`/deck/${deck.id}`)}
                         >
                           Use deck
                         </button>

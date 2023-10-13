@@ -7,8 +7,7 @@ import Home from './components/Home'
 export const routes = createRoutesFromElements(
   <Route path="/" element={<Layout />}>
     <Route index element={<Home />} />
-    <Route path="/deck-library" element={<DeckLibrary />}/>
+    <Route path="/deck-library" element={<DeckLibrary />} />
+    <Route path="deck/:deckId" element={<Flashcards />} />
   </Route>
 )
-
-
