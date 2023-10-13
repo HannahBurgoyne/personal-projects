@@ -4,7 +4,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Deck, NewDeck } from '../../models/models'
 import { addNewDeck } from '../apiClient'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { useState } from 'react'
 
 // interface Props {
@@ -15,6 +15,7 @@ import { useState } from 'react'
 function AddNewDeck() {
   const queryClient = useQueryClient()
   const [inputFields, setInputFields] = useState([{ question: '', answer: '' }])
+  const { newDeckId } = useParams()
 
   // if (props.total) {
   //   const number = props.total + 1
@@ -48,6 +49,7 @@ function AddNewDeck() {
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    console.log('handle submit called')
     e.preventDefault()
 
     const target = e.currentTarget
@@ -67,7 +69,7 @@ function AddNewDeck() {
     const flashcard5Answer = form.get('flashcard5A')?.valueOf() as string
 
     const newDeck: Deck = {
-      id: number,
+      id: Number(newDeckId),
       deck_name: deckName,
       author: deckAuthor,
       flashcards: [
@@ -109,28 +111,32 @@ function AddNewDeck() {
             <h4 className="form-label">Enter your flashcards</h4>
             {inputFields.map((input, index) => (
               <>
-                <label htmlFor={`${index + 1}`}>Card {index + 1}</label>
-                <input
-                  key={`input-q ${index}`}
-                  name={`flashcard${index + 1}Q`}
-                  placeholder="question"
-                  value={input.question}
-                  onChange={(e) => handleFormChange(index, e)}
-                />
-                <input
-                  key={`input-a ${index}`}
-                  name={`flashcard${index + 1}A`}
-                  placeholder="answer"
-                  value={input.answer}
-                  onChange={(e) => handleFormChange(index, e)}
-                />
-                <button onClick={() => removeInputField(index)}>
-                  Remove card
-                </button>
+                <div>
+                  <label htmlFor={`${index + 1}`}>Card {index + 1}</label>
+                  <input
+                    key={`input-q ${index}`}
+                    name={`flashcard${index + 1}Q`}
+                    placeholder="question"
+                    value={input.question}
+                    onChange={(e) => handleFormChange(index, e)}
+                  />
+                  <input
+                    key={`input-a ${index}`}
+                    name={`flashcard${index + 1}A`}
+                    placeholder="answer"
+                    value={input.answer}
+                    onChange={(e) => handleFormChange(index, e)}
+                  />
+                  <button onClick={() => removeInputField(index)}>
+                    Remove card
+                  </button>
+                </div>
               </>
             ))}
-            <button onClick={addInputField}>Add card</button>
-            <button className="form-btn" onClick={handleSubmit}>
+            <button type="button" onClick={addInputField}>
+              Add card
+            </button>
+            <button className="form-btn" type="submit">
               Submit entire deck
             </button>
           </form>

@@ -57,7 +57,11 @@ function DeckLibrary() {
             </>
           ))}
         <div className="add-new-container">
-          <button onClick={() => navigate(`/add-new`)} className="add-deck-btn">
+          <button
+            // The following line ensures no duplicate deck ids in database when adding a new deck
+            onClick={() => navigate(`/add-new/${data ? data.length + 1 : ''}`)}
+            className="add-deck-btn"
+          >
             Add new deck
           </button>
         </div>

@@ -10,6 +10,6 @@ export const routes = createRoutesFromElements(
     <Route index element={<Home />} />
     <Route path="/deck-library" element={<DeckLibrary />} />
     <Route path="deck/:deckId" element={<Flashcards />} />
-    <Route path="/add-new" element={<AddNewDeck />} />
+    <Route path="/add-new/:deckId" element={<AddNewDeck />} />
   </Route>
 )
