@@ -105,23 +105,21 @@ function AddNewDeck() {
               type="text"
               name="deckAuthor"
             ></input>
-            <label htmlFor="flashcardsNo">
-              How many flashcards do you need?
-            </label>
 
             <h4 className="form-label">Enter your flashcards</h4>
             {inputFields.map((input, index) => (
               <>
+                <label htmlFor={`${index + 1}`}>Card {index + 1}</label>
                 <input
                   key={`input-q ${index}`}
-                  name="question"
+                  name={`flashcard${index + 1}Q`}
                   placeholder="question"
                   value={input.question}
                   onChange={(e) => handleFormChange(index, e)}
                 />
                 <input
                   key={`input-a ${index}`}
-                  name="answer"
+                  name={`flashcard${index + 1}A`}
                   placeholder="answer"
                   value={input.answer}
                   onChange={(e) => handleFormChange(index, e)}
@@ -132,73 +130,7 @@ function AddNewDeck() {
               </>
             ))}
             <button onClick={addInputField}>Add card</button>
-
-            <label htmlFor="flashcards">Card 1</label>
-            <input
-              className="new deck"
-              placeholder="question "
-              type="text"
-              name="flashcard1Q"
-            ></input>
-            <input
-              className="new deck"
-              placeholder="answer "
-              type="text"
-              name="flashcard1A"
-            ></input>
-            <label htmlFor="flashcards">Card 2</label>
-            <input
-              className="new deck"
-              placeholder="question"
-              type="text"
-              name="flashcard2Q"
-            ></input>
-            <input
-              className="new deck"
-              placeholder="answer"
-              type="text"
-              name="flashcard2A"
-            ></input>
-            <label htmlFor="flashcards">Card 3</label>
-            <input
-              className="new deck"
-              placeholder="question"
-              type="text"
-              name="flashcard3Q"
-            ></input>
-            <input
-              className="new deck"
-              placeholder="answer"
-              type="text"
-              name="flashcard3A"
-            ></input>
-            <label htmlFor="flashcards">Card 4</label>
-            <input
-              className="new deck"
-              placeholder="question"
-              type="text"
-              name="flashcard4Q"
-            ></input>
-            <input
-              className="new deck"
-              placeholder="answer"
-              type="text"
-              name="flashcard4A"
-            ></input>
-            <label htmlFor="flashcards">Card 5</label>
-            <input
-              className="new deck"
-              placeholder="question"
-              type="text"
-              name="flashcard5Q"
-            ></input>
-            <input
-              className="new deck"
-              placeholder="answer"
-              type="text"
-              name="flashcard5A"
-            ></input>
-            <button className="form-btn" onSubmit={(e) => handleSubmit}>
+            <button className="form-btn" onClick={handleSubmit}>
               Submit entire deck
             </button>
           </form>
