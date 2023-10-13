@@ -216,7 +216,7 @@ footer {
   background-color: transparent;
 }
 
-.edit-card-content {
+.edit-card-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
