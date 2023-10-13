@@ -4,7 +4,7 @@
 import { useQuery } from '@tanstack/react-query'
 import { fetchDeck } from '../apiClient'
 import { FlashcardData } from '../../models/models'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Card from './Card'
 import EditCard from './EditCard'
 import { useParams } from 'react-router-dom'
@@ -21,45 +21,35 @@ function Flashcards() {
   const [counter, setCounter] = useState(0)
   const [clickEnabled, setClickEnabled] = useState(true)
   const [showEdit, setShowEdit] = useState(false)
+  const [shuffledCards, setShuffledCards] = useState([] as FlashcardData[])
 
   function showEditPage() {
     setShowEdit(!showEdit)
   }
 
-  let shuffledCards: FlashcardData[] = []
+  // Shuffle the cards when the data is available
+  useEffect(() => {
+    if (!isLoading && !isError && data) {
+      const shuffledData = randomizeCards(data)
+      setShuffledCards(shuffledData)
+    }
+  }, [isLoading, isError, data])
 
-  if (!isLoading && !isError && data) {
-    // Create an array of card indexes and shuffle it
-    const cardIndexes = Array.from({ length: data.length }, (_, index) => index)
-    const shuffledIndexes = randomizeCards(cardIndexes)
-
-    // Use the shuffled indexes to reorder the cards while preserving the pairing
-    shuffledCards = shuffledIndexes.map((index) => data[index])
+  // Function to shuffle the cards
+  function randomizeCards(cards: FlashcardData[]) {
+    return [...cards].sort(() => Math.random() - 0.5)
   }
 
-  //--- function to randomise deck ---//
-  function randomizeCards(cards: any[]) {
-    const shuffledDeck = [...cards].sort(() => Math.random() - 0.5)
-    return shuffledDeck
-  }
-
-  // Only shuffle the cards when data is available and there are no errors
-  if (!isLoading && !isError && data) {
-    shuffledCards = randomizeCards(data)
-  }
-
-  function nextCard(data: FlashcardData[]) {
-    if (counter == data.length) {
+  function nextCard() {
+    if (counter === shuffledCards.length - 1) {
       setCounter(0)
     } else {
       setCounter((prevCounter) => prevCounter + 1)
-      console.log(counter)
     }
     setClickEnabled(true)
   }
 
   const currentCard = shuffledCards[counter]
-  console.log('current', currentCard)
 
   return (
     <>
@@ -72,7 +62,7 @@ function Flashcards() {
       ) : shuffledCards.length > 0 ? (
         <>
           {currentCard && <Card currentCard={currentCard} />}
-          <button onClick={(e) => nextCard(data)}>Next card</button>
+          <button onClick={nextCard}>Next card</button>
           <button onClick={showEditPage} className="add-deck-btn">
             Edit deck
           </button>
