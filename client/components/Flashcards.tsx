@@ -4,14 +4,10 @@
 import { useQuery } from '@tanstack/react-query'
 import { fetchDeck } from '../apiClient'
 import { FlashcardData } from '../../models/models'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Card from './Card'
 import EditCard from './EditCard'
 import { useParams } from 'react-router-dom'
-
-// interface Props {
-//   id: number | null
-// }
 
 function Flashcards() {
   const { deckId } = useParams()
@@ -52,8 +48,8 @@ function Flashcards() {
     shuffledCards = randomizeCards(data)
   }
 
-  function nextCard() {
-    if (counter == 4) {
+  function nextCard(data: FlashcardData[]) {
+    if (counter == data.length) {
       setCounter(0)
     } else {
       setCounter((prevCounter) => prevCounter + 1)
@@ -76,7 +72,7 @@ function Flashcards() {
       ) : shuffledCards.length > 0 ? (
         <>
           {currentCard && <Card currentCard={currentCard} />}
-          <button onClick={nextCard}>Next card</button>
+          <button onClick={(e) => nextCard(data)}>Next card</button>
           <button onClick={showEditPage} className="add-deck-btn">
             Edit deck
           </button>
