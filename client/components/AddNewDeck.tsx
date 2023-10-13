@@ -15,7 +15,8 @@ import { useState } from 'react'
 function AddNewDeck() {
   const queryClient = useQueryClient()
   const [inputFields, setInputFields] = useState([{ question: '', answer: '' }])
-  const { newDeckId } = useParams()
+  const { deckId } = useParams()
+  const newDeckId = Number(deckId)
 
   // if (props.total) {
   //   const number = props.total + 1
@@ -55,23 +56,43 @@ function AddNewDeck() {
     const target = e.currentTarget
     const form = new FormData(target)
 
-    const data = Array.from(form.entries())
-
-    // The below func puts the data into a readable array of objects
-
+    // The below code puts the data into a readable array of objects
     const deck = {}
-    data.map((entry) => {
-      const key = entry[0]
-      const value = form.get(key)?.valueOf() as string
-      deck[key] = value
-    })
-    console.log(deck)
+    const flashcards = []
+
+    // Iterate over the form data to extract deck data and flashcards
+    for (const [key, value] of form.entries()) {
+      if (key.startsWith('flashcard')) {
+        // If the key starts with 'flashcard', it's a flashcard field
+        const [, number, type] = key.split(/(\d+)([A-Za-z]+)/)
+        const flashcardIndex = parseInt(number, 10) - 1
+
+        // Create a flashcard object if it doesn't exist yet
+        if (!flashcards[flashcardIndex]) {
+          flashcards[flashcardIndex] = { number: flashcardIndex + 1 }
+        }
+
+        // Map the 'Q' and 'A' to 'question' and 'answer'
+        if (type === 'Q') {
+          flashcards[flashcardIndex]['question'] = value
+        } else if (type === 'A') {
+          flashcards[flashcardIndex]['answer'] = value
+        }
+      } else {
+        // For non-flashcard fields, assign them to the deck object
+        deck[key] = value
+      }
+    }
 
     const newDeck: Deck = {
-      id: Number(newDeckId),
+      id: newDeckId,
       deck_name: String(deck['deckName']),
-      deck_author: String(deck['deckAuthor']),
+      author: String(deck['deckAuthor']),
+      flashcards: flashcards.filter(Boolean), // Remove undefined entries
     }
+
+    console.log(newDeck)
+    addMutation.mutate(newDeck)
   }
 
   // const flashcard1Question = form.get('flashcard1Q')?.valueOf() as string
