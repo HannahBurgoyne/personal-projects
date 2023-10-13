@@ -45,11 +45,11 @@ export interface FlashcardData extends FlashcardInfo {
 export interface NewDeck {
   deck_name: string
   author: string
-  flashcards: Flashcard[]
 }
 
 export interface Deck extends NewDeck {
   id: number
+  flashcards: Flashcard[]
 }
 
 export interface AllDecks {

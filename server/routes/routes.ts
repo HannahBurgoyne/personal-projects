@@ -33,7 +33,7 @@ router.post('/:deckId', async (req, res) => {
       id: Number(req.params.deckId),
       deck_name: deck_name,
       author: author,
-      flashcards: flashcards as NewFlashcard[],
+      flashcards: flashcards as Flashcard[],
     }
 
     const newDeck = {
