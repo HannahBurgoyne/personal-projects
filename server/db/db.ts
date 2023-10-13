@@ -47,18 +47,18 @@ export async function addNewFlashcardsToDeck(
 export async function deleteDeckAndFlashcards(deckId: number, db = connection) {
   try {
     await db.transaction(async (trx) => {
-      // find flashcards associated with the deck
-      const flashcardIds = await trx('deck-flashcards')
+      // Find flashcards associated with the deck
+      const flashcardIds = await trx('joining_table')
         .where('deck_id', deckId)
         .pluck('flashcard_id')
 
-      // delete rows in junction table
-      await trx('deck-flashcards').where('deck_id', deckId).del()
+      // Delete rows in the junction table
+      await trx('joining_table').where('deck_id', deckId).del()
 
-      // delete deck
+      // Delete deck
       await trx('decks').where('id', deckId).del()
 
-      // delete flashcards
+      // Delete flashcards using .whereIn
       await trx('flashcards').whereIn('id', flashcardIds).del()
     })
   } catch (error) {
@@ -99,19 +99,6 @@ export function getAllFlashcards(
 }
 
 // function to delete a flashcard from a deck - call the flashcards, decks, and deck-flashcards db
-// export function deleteFlashcard(
-//   flashcardId: number,
-//   db = connection
-// ): Promise<Flashcard[]> {
-//   return (
-//     db<Flashcard>('flashcards')
-//       .join('joining_table', 'flashcards.id', 'joining_table.flashcard_id')
-//       .where('flashcards.id', flashcardId)
-//       // .where('joining_table.flashcard_id', flashcardId)
-//       .del()
-//   )
-// }
-
 export function deleteFlashcard(
   flashcardId: number,
   db = connection

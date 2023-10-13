@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query'
-import { fetchAllDecks } from '../apiClient'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { deleteDeck, fetchAllDecks } from '../apiClient'
 import Flashcards from './Flashcards'
 import { useState } from 'react'
 import AddNewDeck from './AddNewDeck'
@@ -10,27 +10,27 @@ import { useNavigate } from 'react-router-dom'
 
 function DeckLibrary() {
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
   const { data } = useQuery(['deck'], fetchAllDecks)
-  // const [useFlashcards, setUseFlashcards] = useState(false)
   const [showAdd, setShowAdd] = useState(false)
-  // const [selectedDeckId, setSelectedDeckId] = useState<number | null>(null)
 
-  // function showFlashcards(deckId: number) {
-  //   setSelectedDeckId(deckId)
-  // }
+  const deleteMutation = useMutation({
+    mutationFn: (deckId: number) => deleteDeck(deckId),
+    onSuccess: () => {
+      queryClient.invalidateQueries(['deck'])
+    },
+  })
 
-  // function showAddForm() {
-  //   setShowAdd(!showAdd)
-  // }
+  async function handleDelClick(
+    e: React.MouseEvent<HTMLButtonElement>,
+    deckId: number
+  ) {
+    e.preventDefault()
+    deleteMutation.mutate(deckId)
+  }
 
   return (
     <div className="parent-deck-library">
-      {/* {showAdd ? (
-        <section className="add-deck-container">
-          <AddNewDeck total={data?.length} showAdd={showAdd} />
-        </section>
-      ) : (
-        <> */}
       <div className="decks">
         {data &&
           data.map((deck) => (
@@ -50,7 +50,12 @@ function DeckLibrary() {
                     >
                       Use deck
                     </button>
-                    {/* <button>Go to deck library</button> */}
+                    <button
+                      className="deck-button"
+                      onClick={(e) => handleDelClick(e, deck.id)}
+                    >
+                      Delete deck
+                    </button>
                   </div>
                 </div>
               </div>

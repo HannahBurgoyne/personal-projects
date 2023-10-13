@@ -2,15 +2,10 @@
 // Sits inside the layout, linked from deck library - or nested inside deck library as a toggle component
 
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { Deck, NewDeck } from '../../models/models'
+import { Deck } from '../../models/models'
 import { addNewDeck } from '../apiClient'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useState } from 'react'
-
-// interface Props {
-//   total: number | undefined
-//   showAdd: boolean
-// }
 
 function AddNewDeck() {
   const navigate = useNavigate()
@@ -97,36 +92,6 @@ function AddNewDeck() {
     navigate('/deck-library')
   }
 
-  // const flashcard1Question = form.get('flashcard1Q')?.valueOf() as string
-  // const flashcard1Answer = form.get('flashcard1A')?.valueOf() as string
-  // const flashcard2Question = form.get('flashcard2Q')?.valueOf() as string
-  // const flashcard2Answer = form.get('flashcard2A')?.valueOf() as string
-  // const flashcard3Question = form.get('flashcard3Q')?.valueOf() as string
-  // const flashcard3Answer = form.get('flashcard3A')?.valueOf() as string
-  // const flashcard4Question = form.get('flashcard4Q')?.valueOf() as string
-  // const flashcard4Answer = form.get('flashcard4A')?.valueOf() as string
-  // const flashcard5Question = form.get('flashcard5Q')?.valueOf() as string
-  // const flashcard5Answer = form.get('flashcard5A')?.valueOf() as string
-
-  // const newDeck: Deck = {
-  //   id: Number(newDeckId),
-  //   deck_name: deckName,
-  //   author: deckAuthor,
-  //   flashcards: [
-  //     {
-  //       number: 1,
-  //       question: flashcard1Question,
-  //       answer: flashcard1Answer,
-  //     },
-  //     { number: 2, question: flashcard2Question, answer: flashcard2Answer },
-  //     { number: 3, question: flashcard3Question, answer: flashcard3Answer },
-  //     { number: 4, question: flashcard4Question, answer: flashcard4Answer },
-  //     { number: 5, question: flashcard5Question, answer: flashcard5Answer },
-  //   ],
-  // }
-
-  // addMutation.mutate(newDeck)
-
   return (
     <>
       <div className="addformcontainer">
@@ -156,14 +121,12 @@ function AddNewDeck() {
                     key={`input-q ${index}`}
                     name={`flashcard${index + 1}Q`}
                     placeholder="question"
-                    // value={input.question}
                     onChange={(e) => handleFormChange(index, e)}
                   />
                   <input
                     key={`input-a ${index}`}
                     name={`flashcard${index + 1}A`}
                     placeholder="answer"
-                    // value={input.answer}
                     onChange={(e) => handleFormChange(index, e)}
                   />
                   <button onClick={() => removeInputField(index)}>
