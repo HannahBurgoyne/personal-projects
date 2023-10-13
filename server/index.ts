@@ -4,7 +4,7 @@ const port = process.env.PORT || 3000
 
 server.listen(port, () => {
   // eslint-disable-next-line no-console
-  console.log('API listening on port', port)
+  console.log('Server listening on port', port)
 })
 
 // ---- Stretch/Bootcamp goals ---- //

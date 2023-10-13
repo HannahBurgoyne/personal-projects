@@ -20,7 +20,8 @@ export async function fetchDeck(deckId: number) {
   return data.body as FlashcardData[]
 }
 
-export async function addNewDeck(deckId: number, deckData: NewDeck) {
+export async function addNewDeck(deckData: Deck) {
+  const deckId = deckData.id
   await request.post(`${baseUrl}${deckId}`).send(deckData)
 }
 

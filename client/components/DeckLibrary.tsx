@@ -25,45 +25,43 @@ function DeckLibrary() {
 
   return (
     <div className="parent-deck-library">
-      {showAdd ? (
+      {/* {showAdd ? (
         <section className="add-deck-container">
           <AddNewDeck total={data?.length} showAdd={showAdd} />
         </section>
       ) : (
-        <>
-          <div className="decks">
-            {data &&
-              data.map((deck) => (
-                <>
-                  <div className="library-container">
-                    <div key={`deck ${deck.id}`} className="deck-container">
-                      <div className="deck-content">
-                        <h2 className="deck-title" key={`name ${deck.id}`}>
-                          {deck.deck_name}
-                        </h2>
-                        <h4 className="deck-author" key={`author ${deck.id}`}>
-                          {deck.author}
-                        </h4>
-                        <button
-                          className="deck-button"
-                          onClick={() => navigate(`/deck/${deck.id}`)}
-                        >
-                          Use deck
-                        </button>
-                        {/* <button>Go to deck library</button> */}
-                      </div>
-                    </div>
+        <> */}
+      <div className="decks">
+        {data &&
+          data.map((deck) => (
+            <>
+              <div className="library-container">
+                <div key={`deck ${deck.id}`} className="deck-container">
+                  <div className="deck-content">
+                    <h2 className="deck-title" key={`name ${deck.id}`}>
+                      {deck.deck_name}
+                    </h2>
+                    <h4 className="deck-author" key={`author ${deck.id}`}>
+                      {deck.author}
+                    </h4>
+                    <button
+                      className="deck-button"
+                      onClick={() => navigate(`/deck/${deck.id}`)}
+                    >
+                      Use deck
+                    </button>
+                    {/* <button>Go to deck library</button> */}
                   </div>
-                </>
-              ))}
-            <div className="add-new-container">
-              <button onClick={showAddForm} className="add-deck-btn">
-                Add new deck
-              </button>
-            </div>
-          </div>
-        </>
-      )}
+                </div>
+              </div>
+            </>
+          ))}
+        <div className="add-new-container">
+          <button onClick={showAddForm} className="add-deck-btn">
+            Add new deck
+          </button>
+        </div>
+      </div>
     </div>
   )
 }

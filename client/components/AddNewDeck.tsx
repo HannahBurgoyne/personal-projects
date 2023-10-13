@@ -6,12 +6,12 @@ import { Deck, NewDeck } from '../../models/models'
 import { addNewDeck } from '../apiClient'
 import { Link } from 'react-router-dom'
 
-interface Props {
-  total: number | undefined
-  showAdd: boolean
-}
+// interface Props {
+//   total: number | undefined
+//   showAdd: boolean
+// }
 
-function AddNewDeck(props: Props) {
+function AddNewDeck() {
   const queryClient = useQueryClient()
 
   if (props.total) {
@@ -43,7 +43,8 @@ function AddNewDeck(props: Props) {
       const flashcard5Question = form.get('flashcard5Q')?.valueOf() as string
       const flashcard5Answer = form.get('flashcard5A')?.valueOf() as string
 
-      const newDeck: NewDeck = {
+      const newDeck: Deck = {
+        id: number,
         deck_name: deckName,
         author: deckAuthor,
         flashcards: [
