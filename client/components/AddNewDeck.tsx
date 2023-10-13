@@ -4,7 +4,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Deck, NewDeck } from '../../models/models'
 import { addNewDeck } from '../apiClient'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useState } from 'react'
 
 // interface Props {
@@ -13,6 +13,7 @@ import { useState } from 'react'
 // }
 
 function AddNewDeck() {
+  const navigate = useNavigate()
   const queryClient = useQueryClient()
   const [inputFields, setInputFields] = useState([{ question: '', answer: '' }])
   const { deckId } = useParams()
@@ -93,6 +94,7 @@ function AddNewDeck() {
 
     console.log(newDeck)
     addMutation.mutate(newDeck)
+    navigate('/deck-library')
   }
 
   // const flashcard1Question = form.get('flashcard1Q')?.valueOf() as string
