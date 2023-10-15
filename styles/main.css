@@ -158,13 +158,6 @@ footer {
   line-height: 220px;
 }
 
-/* .add-deck-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-} */
-
 .add-form-container {
   display: flex;
   flex-direction: column;
@@ -287,36 +280,4 @@ footer {
 
 .flashcard-design:hover {
   background-color: rgb(254, 231, 235);
-}
-
-/* Figure out how to make card shift diagonally downwards */
-.flashcard-design:active {
-  transform: translateY(10px);
-  /* transform: translateZ(-9px); */
-}
-
-#active-flashcard {
-  border: solid 2px black;
-  border-radius: 15%;
-  height: 380px;
-  width: 280px;
-  background-color: pink;
-  padding: 5px;
-  line-height: 220px;
-}
-
-#active-flashcard-inner {
-  border: solid 2px black;
-  border-radius: 15%;
-  height: 380px;
-  width: 280px;
-  background-color: green;
-  padding: 5px;
-  line-height: 220px;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-}
-
-.flip-card {
-  transform: rotateY(180deg);
 }
