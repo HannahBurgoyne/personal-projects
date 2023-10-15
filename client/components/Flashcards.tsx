@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import Card from './Card'
 import EditCard from './EditCard'
 import { useParams } from 'react-router-dom'
+import { motion } from 'framer-motion'
 
 function Flashcards() {
   const { deckId } = useParams()

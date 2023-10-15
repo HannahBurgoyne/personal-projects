@@ -29,6 +29,8 @@ button {
 
 .card-text {
   color: black;
+  background-color: white;
+  font-family: sans-serif;
 }
 
 button:hover {
