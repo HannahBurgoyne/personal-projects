@@ -1,0 +1,322 @@
+* {
+  background-color: rgb(85, 51, 117);
+}
+
+h1,
+a {
+  display: block;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 30px;
+  color: white;
+  background: none !important;
+  text-align: center;
+  text-decoration: none;
+}
+
+p {
+  background-color: transparent;
+  color: white;
+  font-family: sans-serif;
+}
+
+button {
+  color: white;
+  border: 1px solid white;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.card-text {
+  color: black;
+  background-color: white;
+  font-family: sans-serif;
+}
+
+button:hover {
+  background-color: white;
+  color: rgb(85, 51, 117);
+}
+
+.form-label {
+  color: white;
+  font-family: sans-serif;
+  font-size: 18px;
+  font-weight: lighter;
+}
+
+.form-btn {
+  padding: 5px;
+  margin: 5%;
+}
+
+label {
+  color: white;
+  font-family: sans-serif;
+}
+
+input {
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px;
+}
+
+#parent-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 10%;
+  padding: 2%;
+}
+
+.page-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5%;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 13px;
+  font-family: sans-serif;
+}
+
+.logo {
+  background-color: transparent;
+}
+
+.logo-container {
+  display: flex;
+  padding: 5px;
+  background-color: white;
+}
+
+.parent-flashcards-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-flashcards-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.home-flashcard {
+  background-color: rgb(168, 71, 213);
+  width: 150px;
+  height: 200px;
+  border-radius: 25px;
+  padding: 5px;
+  box-shadow: 10px 10px rgb(90, 0, 128);
+}
+
+.instructions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 15px;
+  font-family: sans-serif;
+}
+
+.decks {
+  display: flex;
+}
+
+.add-new-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+/* Figure out how to create a stacked cards look for the homepage ones */
+.flashcard-design {
+  border: solid 2px black;
+  border-radius: 15%;
+  box-shadow: 5px 5px;
+  height: 270px;
+  width: 180px;
+  background-color: pink;
+  padding: 5px;
+  line-height: 220px;
+}
+
+/* .add-deck-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+} */
+
+.add-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.add-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+}
+
+.parent-deck-library {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.library-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.deck-container {
+  box-shadow: 10px 10px rgb(67, 2, 104);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 160px;
+  height: 200px;
+  padding: 20px;
+  background-color: rgb(255, 255, 255);
+}
+
+.edit-form-input {
+  text-align: center;
+  width: 120px;
+  font-size: medium;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.deck-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 20px;
+  background-color: transparent;
+}
+
+.edit-card-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 20px;
+  background-color: transparent;
+}
+
+.new-flashcard-input {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.deck-title,
+.deck-author {
+  background-color: transparent;
+}
+
+.deck-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+}
+
+.save-button {
+  margin-top: 20px;
+}
+
+.flashcard-container {
+  border: solid 2px black;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  padding: 20px;
+  background-color: white;
+}
+
+.flashcard-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 20px;
+  background-color: transparent;
+}
+
+.flashcard-design:hover {
+  background-color: rgb(254, 231, 235);
+}
+
+/* Figure out how to make card shift diagonally downwards */
+.flashcard-design:active {
+  transform: translateY(10px);
+  /* transform: translateZ(-9px); */
+}
+
+#active-flashcard {
+  border: solid 2px black;
+  border-radius: 15%;
+  height: 380px;
+  width: 280px;
+  background-color: pink;
+  padding: 5px;
+  line-height: 220px;
+}
+
+#active-flashcard-inner {
+  border: solid 2px black;
+  border-radius: 15%;
+  height: 380px;
+  width: 280px;
+  background-color: green;
+  padding: 5px;
+  line-height: 220px;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card {
+  transform: rotateY(180deg);
+}

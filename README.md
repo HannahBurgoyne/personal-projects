@@ -25,3 +25,8 @@ Currently, a user can add a new deck of 5 flashcards, and use these decks. Next 
 - Prop drilling state management in React
 - Creating many-to-many relationships between databases
 - Querying many-to-many relational databases
+- How to add a dynamic form in React (and submit dynamic data!)
+- Refactoring previous work
+- Improving UX 
+- Working with the framer-motion animation library 
+
