@@ -63,19 +63,21 @@ function EditCard(props: Props) {
 
   return (
     <div className="edit-flashcards-container">
-      <div className="deck-container">
+      <div className="deck-container edit">
         <form onSubmit={handleFormSubmit} className="edit-card-form">
           <input
             type="text"
             name="flashcard-q"
+            className="edit-form-input"
             placeholder={props.card.question}
           />
           <input
             type="text"
             name="flashcard-a"
+            className="edit-form-input"
             placeholder={props.card.answer}
           />
-          <button>Save</button>
+          <button className="save-button">Save</button>
         </form>
         <button onClick={(e) => handleDelClick(e, props.card.flashcardId)}>
           Delete

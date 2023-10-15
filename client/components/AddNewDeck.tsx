@@ -46,7 +46,6 @@ function AddNewDeck() {
   }
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    console.log('handle submit called')
     e.preventDefault()
 
     const target = e.currentTarget
@@ -94,19 +93,19 @@ function AddNewDeck() {
 
   return (
     <>
-      <div className="addformcontainer">
+      <div className="add-form-container">
         <h1>Add new deck</h1>
         <div className="add-form">
           <form onSubmit={handleSubmit}>
             <label htmlFor="deck">Give your deck a name and author</label>
             <input
-              className="new deck"
+              className="new-deck"
               placeholder="deck name"
               type="text"
               name="deckName"
             ></input>
             <input
-              className="new deck"
+              className="new-deck"
               placeholder="deck author"
               type="text"
               name="deckAuthor"
@@ -115,7 +114,7 @@ function AddNewDeck() {
             <h4 className="form-label">Enter your flashcards</h4>
             {inputFields.map((input, index) => (
               <>
-                <div>
+                <div className="new-flashcard-input">
                   <label htmlFor={`${index + 1}`}>Card {index + 1}</label>
                   <input
                     key={`input-q ${index}`}
