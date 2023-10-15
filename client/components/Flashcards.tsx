@@ -15,6 +15,7 @@ function Flashcards() {
   const { data, isLoading, isError } = useQuery(queryKey, () =>
     fetchDeck(dataId)
   )
+  const [isFlipped, setIsFlipped] = useState(false)
   const [counter, setCounter] = useState(0)
   const [clickEnabled, setClickEnabled] = useState(true)
   const [showEdit, setShowEdit] = useState(false)
@@ -44,6 +45,7 @@ function Flashcards() {
       setCounter((prevCounter) => prevCounter + 1)
     }
     setClickEnabled(true)
+    setIsFlipped(false)
   }
 
   const currentCard = shuffledCards[counter]
@@ -59,7 +61,15 @@ function Flashcards() {
       ) : shuffledCards.length > 0 ? (
         <>
           {currentCard && (
-            <Card {...{ currentCard, clickEnabled, setClickEnabled }} />
+            <Card
+              {...{
+                currentCard,
+                clickEnabled,
+                setClickEnabled,
+                isFlipped,
+                setIsFlipped,
+              }}
+            />
           )}
           <button onClick={nextCard}>Next card</button>
           <button onClick={showEditPage} className="add-deck-btn">

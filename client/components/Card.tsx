@@ -6,11 +6,18 @@ interface Props {
   currentCard: FlashcardData
   clickEnabled: boolean
   setClickEnabled: React.Dispatch<React.SetStateAction<boolean>>
+  isFlipped: boolean
+  setIsFlipped: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 function Card(props: Props) {
-  const [isFlipped, setIsFlipped] = useState(false)
-  const { currentCard, clickEnabled, setClickEnabled } = props
+  const {
+    currentCard,
+    clickEnabled,
+    setClickEnabled,
+    isFlipped,
+    setIsFlipped,
+  } = props
 
   function flipCard() {
     setIsFlipped(!isFlipped)

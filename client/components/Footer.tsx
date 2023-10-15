@@ -6,7 +6,7 @@ function Footer() {
         <a href="https://github.com/HannahBurgoyne">
           <img
             className="logo"
-            src="images/github-mark.png"
+            src="/images/github-mark.png"
             alt="github logo"
             width="60px"
             height="auto"
