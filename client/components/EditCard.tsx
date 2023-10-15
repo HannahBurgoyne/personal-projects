@@ -1,7 +1,4 @@
-// This contains an edit mode for any deck
-// Shows you all the flashcards in your deck, and the option to edit or delete each one
-
-import React, { useState } from 'react'
+import React from 'react'
 import { FlashcardData, FlashcardInfo, NewFlashcard } from '../../models/models'
 import { useQueryClient, useMutation } from '@tanstack/react-query'
 import { deleteCard, updateFlashcard } from '../apiClient.tsx'

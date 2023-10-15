@@ -1,18 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { deleteDeck, fetchAllDecks } from '../apiClient'
-import Flashcards from './Flashcards'
 import { useState } from 'react'
-import AddNewDeck from './AddNewDeck'
-import EditMode from './EditCard'
 import { useNavigate } from 'react-router-dom'
-// This is where the deck library lives
-// Sits inside layout
 
 function DeckLibrary() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
   const { data } = useQuery(['deck'], fetchAllDecks)
-  const [showAdd, setShowAdd] = useState(false)
 
   const deleteMutation = useMutation({
     mutationFn: (deckId: number) => deleteDeck(deckId),

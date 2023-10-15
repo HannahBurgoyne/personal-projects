@@ -1,6 +1,3 @@
-// This contains the form to add a new deck
-// Sits inside the layout, linked from deck library - or nested inside deck library as a toggle component
-
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Deck } from '../../models/models'
 import { addNewDeck } from '../apiClient'
@@ -13,9 +10,6 @@ function AddNewDeck() {
   const [inputFields, setInputFields] = useState([{ question: '', answer: '' }])
   const { deckId } = useParams()
   const newDeckId = Number(deckId)
-
-  // if (props.total) {
-  //   const number = props.total + 1
 
   const addMutation = useMutation({
     mutationFn: (newDeck: Deck) => addNewDeck(newDeck),

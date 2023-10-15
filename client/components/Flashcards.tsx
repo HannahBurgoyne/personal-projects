@@ -1,6 +1,3 @@
-// This is where you loop through the flashcards deck
-// Sits inside layout
-
 import { useQuery } from '@tanstack/react-query'
 import { fetchDeck } from '../apiClient'
 import { FlashcardData } from '../../models/models'
@@ -8,7 +5,6 @@ import { useEffect, useState } from 'react'
 import Card from './Card'
 import EditCard from './EditCard'
 import { useParams } from 'react-router-dom'
-import { motion } from 'framer-motion'
 
 function Flashcards() {
   const { deckId } = useParams()
@@ -62,7 +58,9 @@ function Flashcards() {
         <p>Error fetching data</p>
       ) : shuffledCards.length > 0 ? (
         <>
-          {currentCard && <Card currentCard={currentCard} />}
+          {currentCard && (
+            <Card {...{ currentCard, clickEnabled, setClickEnabled }} />
+          )}
           <button onClick={nextCard}>Next card</button>
           <button onClick={showEditPage} className="add-deck-btn">
             Edit deck
