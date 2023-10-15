@@ -5,3 +5,4 @@
 - Refactoring previous work
 - Improving UX 
 - Performing CRUD on many-to-many tables 
+- Working with the framer-motion animation library 
