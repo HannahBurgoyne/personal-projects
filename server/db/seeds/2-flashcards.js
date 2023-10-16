@@ -1,6 +1,5 @@
 export async function seed(knex) {
   // Deletes ALL existing entries
-  await knex('flashcards').del()
   await knex('flashcards').insert([
     { id: 1, question: 'hello', answer: 'bonjour' },
     { id: 2, question: 'goodbye', answer: 'au revoir' },

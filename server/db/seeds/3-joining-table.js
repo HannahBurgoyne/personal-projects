@@ -1,6 +1,5 @@
 export async function seed(knex) {
   // Deletes ALL existing entries
-  await knex('joining_table').del()
   await knex('joining_table').insert([
     { id: 1, deck_id: 1, flashcard_id: 1 },
     { id: 2, deck_id: 1, flashcard_id: 2 },
