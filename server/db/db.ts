@@ -50,6 +50,8 @@ export async function addNewDeckWithFlashcards(
   db = connection
 ) {
   return db.transaction(async (trx) => {
+    console.log('newDeck', newDeck)
+    console.log('flashcards', flashcards)
     // Insert the new deck and get its ID
     const [deckId] = await trx<Deck>('decks').insert(newDeck).returning('id')
 
@@ -58,6 +60,8 @@ export async function addNewDeckWithFlashcards(
       question: flashcard.question,
       answer: flashcard.answer,
     }))
+
+    console.log('flashcardsData', flashcardsData)
 
     // Insert the flashcards and get their IDs
     const flashcardIds = await trx<Flashcard>('flashcards')
@@ -121,7 +125,7 @@ export function getAllFlashcards(
   return db<Flashcard>('flashcards')
     .join('joining_table', 'flashcards.id', '=', 'joining_table.flashcard_id')
     .join('decks', 'joining_table.deck_id', '=', 'decks.id')
-    .where('decks.id', deckId)
+    .where('joining_table.deck_id', deckId)
     .select(
       'flashcards.id as flashcardId',
       'decks.id as deckId',
