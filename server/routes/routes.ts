@@ -1,6 +1,7 @@
 import express from 'express'
 import {
   addNewDeck,
+  addNewDeckWithFlashcards,
   addNewFlashcard,
   addNewFlashcardsToDeck,
   deleteDeckAndFlashcards,
@@ -26,7 +27,42 @@ router.get('/', async (req, res) => {
   }
 })
 
-// WORKING IN INSOMNIA - CREATE A NEW DECK AND ALL ITS FLASHCARDS DATA
+// // WORKING IN INSOMNIA - CREATE A NEW DECK AND ALL ITS FLASHCARDS DATA
+// router.post('/:deckId', async (req, res) => {
+//   try {
+//     const { deck_name, author, flashcards } = req.body
+//     const deckFlashcardsData: Deck = {
+//       id: Number(req.params.deckId),
+//       deck_name: deck_name,
+//       author: author,
+//       flashcards: flashcards as Flashcard[],
+//     }
+
+//     const newDeck = {
+//       deck_name,
+//       author,
+//     }
+//     console.log({ newDeck })
+//     // Add new deck
+//     await addNewDeck(newDeck)
+//     console.log({ flashcards })
+//     // This db func is not working
+//     // Add new flashcards
+//     await addNewFlashcard(flashcards)
+//     // add new join table entry
+
+//     await addNewFlashcardsToDeck(deckFlashcardsData)
+//     console.log({ deckFlashcardsData })
+
+//     res.sendStatus(201)
+//   } catch (error) {
+//     if (error instanceof Error) {
+//       console.error(error)
+//       res.status(500).send(error.message)
+//     }
+//   }
+// })
+
 router.post('/:deckId', async (req, res) => {
   try {
     const { deck_name, author, flashcards } = req.body
@@ -41,17 +77,8 @@ router.post('/:deckId', async (req, res) => {
       deck_name,
       author,
     }
-    console.log({ newDeck })
-    // Add new deck
-    await addNewDeck(newDeck)
-    console.log({ flashcards })
-    // This db func is not working
-    // Add new flashcards
-    await addNewFlashcard(flashcards)
-    // add new join table entry
 
-    await addNewFlashcardsToDeck(deckFlashcardsData)
-    console.log({ deckFlashcardsData })
+    await addNewDeckWithFlashcards(newDeck, flashcards)
 
     res.sendStatus(201)
   } catch (error) {
