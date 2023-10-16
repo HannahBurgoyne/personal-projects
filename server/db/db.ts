@@ -90,7 +90,7 @@ export function getAllFlashcards(
   return db<Flashcard>('flashcards')
     .join('joining_table', 'flashcards.id', '=', 'joining_table.flashcard_id')
     .join('decks', 'joining_table.deck_id', '=', 'decks.id')
-    .where('deckId', deckId)
+    .where('decks.id', deckId)
     .select(
       'flashcards.id as flashcardId',
       'decks.id as deckId',
