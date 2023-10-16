@@ -1,15 +1,10 @@
-import * as Path from 'node:path'
-import * as URL from 'node:url'
+import server from './server.ts'
 import dotenv from 'dotenv'
 
-import server from './server'
+dotenv.config()
 
-const __filename = URL.fileURLToPath(import.meta.url)
-const __dirname = Path.dirname(__filename)
-dotenv.config({ path: Path.join(__dirname, '../.env') })
+const port = process.env.PORT || 3000
 
-const PORT = process.env.PORT || 3000
-
-server.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`)
+server.listen(port, () => {
+  console.log('Server listening on port', port)
 })

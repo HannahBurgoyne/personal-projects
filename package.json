@@ -58,7 +58,8 @@
     "vite": "^4.4.9",
     "vitest": "^0.34.1"
   }, 
-  "engines": {
-    "node": "16.x"
+  "browserslist": "> 2%, not dead",
+  "engine": {
+    "node": ">=18.0.0"
   }
 }
