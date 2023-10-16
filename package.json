@@ -59,7 +59,7 @@
     "vitest": "^0.34.1"
   }, 
   "browserslist": "> 2%, not dead",
-  "engine": {
+  "engines": {
     "node": ">=18.0.0"
   }
 }
