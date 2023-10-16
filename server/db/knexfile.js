@@ -37,7 +37,7 @@ export default {
     client: 'pg',
     useNullAsDefault: true,
     connection: {
-      connectionString: process.env.DATABASE_URL,
+      connectionString: process.env.HOST,
       ssl: { rejectUnauthorized: false },
     },
     migrations: {
