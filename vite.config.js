@@ -9,7 +9,9 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/api': `http://0.0.0.0:${process.env.PORT || 3000}`,
+      '/api': {
+        target: `http://0.0.0.0:${process.env.PORT || 3000}`,
+      },
     },
   },
 })
