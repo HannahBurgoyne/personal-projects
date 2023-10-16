@@ -1,8 +1,8 @@
 export function up(knex) {
   return knex.schema.createTable('joining_table', (table) => {
     table.increments('id').primary()
-    table.string('deck_id').references('decks.id')
-    table.string('flashcard_id').references('flashcards.id')
+    table.integer('deck_id').references('decks.id')
+    table.integer('flashcard_id').references('flashcards.id')
   })
 }
 
