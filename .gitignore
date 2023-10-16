@@ -3,3 +3,4 @@ dev.sqlite3
 node_modules
 npm-debug.log
 /dist
+.env
