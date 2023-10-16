@@ -6,10 +6,10 @@
   "type": "module",
   "scripts": {
     "start": "node dist/server.js",
-    "dev": "run-p dev:client dev:server",
+    "dev": "run-p dev:*",
     "dev:client": "vite",
     "dev:server": "tsx watch server/index.ts",
-    "build": "run-s build:client build:server",
+    "build": "run-s build:*",
     "build:client": "vite build",
     "build:server": "esbuild --packages=external --platform=node --format=esm --outfile=dist/server.js --bundle server/index.ts",
     "test": "vitest",
