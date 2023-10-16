@@ -20,6 +20,7 @@ router.get('/', async (req, res) => {
     res.json(decks)
   } catch (error) {
     if (error instanceof Error) {
+      console.error(error)
       res.status(500).send(error.message)
     }
   }
@@ -55,6 +56,7 @@ router.post('/:deckId', async (req, res) => {
     res.sendStatus(201)
   } catch (error) {
     if (error instanceof Error) {
+      console.error(error)
       res.status(500).send(error.message)
     }
   }
@@ -68,6 +70,7 @@ router.get('/:deckId', async (req, res) => {
     res.json(flashcards)
   } catch (error) {
     if (error instanceof Error) {
+      console.error(error)
       res.status(500).send(error.message)
     }
   }
@@ -81,6 +84,7 @@ router.delete('/:deckId', async (req, res) => {
     res.sendStatus(200)
   } catch (error) {
     if (error instanceof Error) {
+      console.error(error)
       res.status(500).send(error.message)
     }
   }
@@ -95,6 +99,7 @@ router.patch('/:deckId/:flashcardId', async (req, res) => {
     res.sendStatus(200)
   } catch (error) {
     if (error instanceof Error) {
+      console.error(error)
       res.status(500).send(error.message)
     }
   }
@@ -108,6 +113,7 @@ router.delete('/:deckId/:flashcardId', async (req, res) => {
     res.sendStatus(200)
   } catch (error) {
     if (error instanceof Error) {
+      console.error(error)
       res.status(500).send(error.message)
     }
   }
