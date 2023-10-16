@@ -1,14 +1,15 @@
-import server from './server.ts'
+import * as Path from 'node:path'
+import * as URL from 'node:url'
+import dotenv from 'dotenv'
 
-const port = process.env.PORT || 3000
+import server from './server'
 
-server.listen(port, () => {
-  // eslint-disable-next-line no-console
-  console.log('Server listening on port', port)
+const __filename = URL.fileURLToPath(import.meta.url)
+const __dirname = Path.dirname(__filename)
+dotenv.config({ path: Path.join(__dirname, '../.env') })
+
+const PORT = process.env.PORT || 3000
+
+server.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`)
 })
-
-// ---- Stretch/Bootcamp goals ---- //
-//
-// User can make their own custom cards
-// Collections of cards can be stored in databases and selected
-// Algorithm which shows user their lower rated cards more often
