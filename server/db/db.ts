@@ -50,8 +50,8 @@ export async function addNewDeckWithFlashcards(
   db = connection
 ) {
   return db.transaction(async (trx) => {
-    console.log('newDeck', newDeck)
-    console.log('flashcards', flashcards)
+    // console.log('newDeck', newDeck)
+    // console.log('flashcards', flashcards)
     // Insert the new deck and get its ID
     const [deckId] = await trx<Deck>('decks').insert(newDeck)
 
