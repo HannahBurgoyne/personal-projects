@@ -28,6 +28,7 @@ export interface NewFlashcard {
 }
 
 export interface Flashcard extends NewFlashcard {
+  id: number
   number: number
 }
 

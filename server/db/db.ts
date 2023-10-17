@@ -49,38 +49,30 @@ export async function addNewDeckWithFlashcards(
   flashcards: NewFlashcard[],
   db = connection
 ) {
-  return db.transaction(async (trx) => {
-    // console.log('newDeck', newDeck)
-    // console.log('flashcards', flashcards)
-    // Insert the new deck and get its ID
-    const [deckId] = await trx<Deck>('decks').insert(newDeck)
+  // Insert the new deck and get its ID
+  const deck = await db<Deck>('decks').insert(newDeck).returning('id')
 
-    // Prepare flashcards data
-    const flashcardsData = flashcards.map((flashcard) => ({
-      question: flashcard.question,
-      answer: flashcard.answer,
-    }))
+  // Prepare flashcards data
+  const flashcardsData = flashcards.map((flashcard) => ({
+    question: flashcard.question,
+    answer: flashcard.answer,
+  }))
 
-    console.log('flashcardsData', flashcardsData)
+  // Insert the flashcards and get their IDs
+  const flashcardIds = await db<Flashcard>('flashcards')
+    .insert(flashcardsData)
+    .returning('id')
 
-    // Insert the flashcards and get their IDs
-    const flashcardIds = await trx<Flashcard>('flashcards').insert(
-      flashcardsData
-    )
+  // Prepare data for the junction table
+  const junctionData = flashcardIds.map((flashcardId) => ({
+    deck_id: deck[0].id,
+    flashcard_id: flashcardId.id,
+  }))
 
-    console.log('flashcardIds', flashcardIds)
+  console.log('junctionData', junctionData)
 
-    // Prepare data for the junction table
-    const junctionData = flashcardIds.map((flashcardId) => ({
-      deck_id: deckId,
-      flashcard_id: flashcardId,
-    }))
-
-    console.log('junctionData', junctionData)
-
-    // Insert the junction data
-    await trx('joining_table').insert(junctionData)
-  })
+  // Insert the junction data
+  await db('joining_table').insert(junctionData)
 }
 
 export async function deleteDeckAndFlashcards(deckId: number, db = connection) {
