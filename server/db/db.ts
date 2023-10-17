@@ -53,7 +53,7 @@ export async function addNewDeckWithFlashcards(
     console.log('newDeck', newDeck)
     console.log('flashcards', flashcards)
     // Insert the new deck and get its ID
-    const [deckId] = await trx<Deck>('decks').insert(newDeck).returning('id')
+    const [deckId] = await trx<Deck>('decks').insert(newDeck)
 
     // Prepare flashcards data
     const flashcardsData = flashcards.map((flashcard) => ({
@@ -64,16 +64,16 @@ export async function addNewDeckWithFlashcards(
     console.log('flashcardsData', flashcardsData)
 
     // Insert the flashcards and get their IDs
-    const flashcardIds = await trx<Flashcard>('flashcards')
-      .insert(flashcardsData)
-      .returning('id')
+    const flashcardIds = await trx<Flashcard>('flashcards').insert(
+      flashcardsData
+    )
 
     console.log('flashcardIds', flashcardIds)
 
     // Prepare data for the junction table
     const junctionData = flashcardIds.map((flashcardId) => ({
-      deck_id: deckId.id,
-      flashcard_id: flashcardId.id,
+      deck_id: deckId,
+      flashcard_id: flashcardId,
     }))
 
     console.log('junctionData', junctionData)
