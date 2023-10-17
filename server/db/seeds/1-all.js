@@ -4,7 +4,7 @@ export async function seed(knex) {
   await knex('flashcards').del()
 
   await knex('decks').insert([{ deck_name: 'Example deck', author: 'Anon' }])
-  const decksIds = await knex('decks').pluck('id')
+  const deckIds = await knex('decks').pluck('id')
 
   await knex('flashcards').insert([
     { question: 'hello', answer: 'bonjour' },
@@ -16,7 +16,7 @@ export async function seed(knex) {
   const flashcardIds = await knex('flashcards').pluck('id')
 
   const joiningTableRecords = flashcardIds.map((flashcardId) => ({
-    deck_id: decksIds[0],
+    deck_id: deckIds[0],
     flashcard_id: flashcardId,
   }))
 
