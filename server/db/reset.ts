@@ -27,9 +27,6 @@ const db = knex(connection)
 
 async function reset() {
   try {
-    // await db.raw('DROP TABLE IF EXISTS knex_migrations;')
-    // await db.raw('DROP TABLE IF EXISTS knex_migrations_lock;')
-    // await db.raw('DROP TABLE IF EXISTS sqlite_sequence;')
     await db.migrate.latest()
     await db.seed.run()
   } catch (err) {
