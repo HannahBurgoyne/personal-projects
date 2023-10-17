@@ -1,6 +1,8 @@
 # Welcome to Flashcards! 
 This project allows a user to create and use their own custom flashcards. I originally built this in HTML, CSS, and JavaScript in week 6 of Foundations at Dev Academy Aotearoa, and then recreated the entire project as a fullstack application in week 7 of Bootcamp. 
 
+:sparkles: This project is now deployed! [View it here](https://flashcards-app-oir7.onrender.com/). 
+
 --------
 ### Tech stack:
 - Node.js
