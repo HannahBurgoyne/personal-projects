@@ -33,4 +33,5 @@ Currently, a user can:
 - Refactoring previous work
 - Improving UX 
 - Working with the framer-motion animation library 
+- Migrating a SQLite3 db to Postgres. Because Postgres doesn't provide a way for the user to wipe the sequence data, I was getting a duplication error when trying to add a new deck, flashcards, and their relationship to each other. I fixed this by refactoring the seed data so that the ids are dynamic instead of hard-coded in. This means that Postgres can use whichever ids it wants for the seed data. 
 
