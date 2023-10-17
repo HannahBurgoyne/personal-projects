@@ -68,11 +68,15 @@ export async function addNewDeckWithFlashcards(
       .insert(flashcardsData)
       .returning('id')
 
+    console.log('flashcardIds', flashcardIds)
+
     // Prepare data for the junction table
     const junctionData = flashcardIds.map((flashcardId) => ({
-      deck_id: deckId,
-      flashcard_id: flashcardId,
+      deck_id: deckId.id,
+      flashcard_id: flashcardId.id,
     }))
+
+    console.log('junctionData', junctionData)
 
     // Insert the junction data
     await trx('joining_table').insert(junctionData)
