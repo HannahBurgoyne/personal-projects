@@ -108,44 +108,4 @@ router.delete('/:deckId/:flashcardId', async (req, res) => {
   }
 })
 
-// NO LONGER NEEDED BUT USE AS REFERENCE FOR ABOVE FUNC
-// router.delete('/:flashcardId', async (req, res) => {
-//   try {
-//     const flashcardId = Number(req.params.flashcardId)
-//     await deleteFlashcard(flashcardId)
-//     res.sendStatus(200)
-//   } catch (error) {
-//     if (error instanceof Error) {
-//       res.status(500).send(error.message)
-//     }
-//   }
-// })
-// // WORKING IN INSOMNIA - change this to delete deck, and all flashcards associated with it
-// router.delete('/:deckId', async (req, res) => {
-//   try {
-//     const deckId = Number(req.params.deckId)
-//     await deleteDeck(deckId)
-//     res.sendStatus(200)
-//   } catch (error) {
-//     if (error instanceof Error) {
-//       res.status(500).send(error.message)
-//     }
-//   }
-// })
-
-// FLASHCARDS ROUTES //
-
-// STRETCH
-// router.patch('/:flashcardId', async (req, res) => {
-//   try {
-//     const flashcardId = Number(req.params.flashcardId)
-//     const updatedFlashcard = req.body
-//     await updateFlashcard(flashcardId, updatedFlashcard)
-//   } catch (error) {
-//     if (error instanceof Error) {
-//       res.status(500).send(error.message)
-//     }
-//   }
-// })
-
 export default router
