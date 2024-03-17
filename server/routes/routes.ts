@@ -1,4 +1,5 @@
 import express from 'express'
+import bodyParser from 'body-parser'
 import {
   addNewDeckWithFlashcards,
   deleteDeckAndFlashcards,
@@ -10,6 +11,9 @@ import {
 import { Deck, Flashcard, NewFlashcard } from '../../models/models'
 
 const router = express.Router()
+
+// parses user inputs from client-side to protect server from malicious activity
+const jsonParser = bodyParser.json({ type: 'application/*+json' })
 
 // WORKING IN INSOMNIA - GET ALL DECKS FOR THE DECK LIBRARY
 router.get('/', async (req, res) => {
@@ -25,7 +29,7 @@ router.get('/', async (req, res) => {
 })
 
 //CREATE A NEW DECK AND ALL ITS FLASHCARDS DATA
-router.post('/:deckId', async (req, res) => {
+router.post('/:deckId', jsonParser, async (req, res) => {
   try {
     const { deck_name, author, flashcards } = req.body
     const deckFlashcardsData: Deck = {
@@ -80,7 +84,7 @@ router.delete('/:deckId', async (req, res) => {
 })
 
 // UPDATE A FLASHCARD WITHIN A DECK
-router.patch('/:deckId/:flashcardId', async (req, res) => {
+router.patch('/:deckId/:flashcardId', jsonParser, async (req, res) => {
   try {
     const flashcardId = Number(req.params.flashcardId)
     const updatedFlashcard = req.body
