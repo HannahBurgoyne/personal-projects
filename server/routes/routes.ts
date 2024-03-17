@@ -12,10 +12,10 @@ import { Deck, Flashcard, NewFlashcard } from '../../models/models'
 
 const router = express.Router()
 
-// parses user inputs from client-side to protect server from malicious activity
+// IMPORTANT: parses user inputted data to protect server from malicious activity
 const jsonParser = bodyParser.json({ type: 'application/*+json' })
 
-// WORKING IN INSOMNIA - GET ALL DECKS FOR THE DECK LIBRARY
+// GET ALL DECKS FOR THE DECK LIBRARY
 router.get('/', async (req, res) => {
   try {
     const decks = await getAllDecks()
@@ -55,7 +55,7 @@ router.post('/:deckId', jsonParser, async (req, res) => {
   }
 })
 
-// GET ALL FLASHCARDS CORRESPONDING TO A DECK ID - WORKING
+// GET ALL FLASHCARDS CORRESPONDING TO A DECK ID
 router.get('/:deckId', async (req, res) => {
   try {
     const deckId = Number(req.params.deckId)
