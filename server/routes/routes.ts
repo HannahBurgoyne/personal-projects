@@ -8,7 +8,7 @@ import {
   getAllFlashcards,
   updateFlashcard,
 } from '../db/db'
-import { Deck, Flashcard, NewFlashcard } from '../../models/models'
+import { Deck, Flashcard } from '../../models/models'
 
 const router = express.Router()
 

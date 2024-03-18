@@ -7,7 +7,7 @@ import { rateLimit } from 'express-rate-limit'
 const __filename = URL.fileURLToPath(import.meta.url)
 const __dirname = Path.dirname(__filename)
 
-// middleware which limits IP requests to 50 per 15min window (security against DDOS attacks)
+// middleware which limits IP requests to 50 per 15min window (security against DDoS attacks)
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   limit: 50,
@@ -23,7 +23,6 @@ server.use('/api/v1/flashcardsapp', routes)
 
 if (process.env.NODE_ENV === 'production') {
   dotenv.config()
-
   server.use(limiter)
   server.use(express.static(Path.resolve('public')))
   server.use('/assets', express.static(Path.resolve('./dist/assets')))
