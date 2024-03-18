@@ -3,8 +3,17 @@ import * as URL from 'node:url'
 import express from 'express'
 import routes from './routes/routes'
 import dotenv from 'dotenv'
+import { rateLimit } from 'express-rate-limit'
 const __filename = URL.fileURLToPath(import.meta.url)
 const __dirname = Path.dirname(__filename)
+
+// middleware which limits IP requests to 50 per 15min window (security against DDOS attacks)
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  limit: 50,
+  standardHeaders: 'draft-7',
+  legacyHeaders: false,
+})
 
 const server = express()
 server.use(express.json())
@@ -13,6 +22,7 @@ server.use(express.static(Path.join(__dirname, 'public')))
 server.use('/api/v1/flashcardsapp', routes)
 
 if (process.env.NODE_ENV === 'production') {
+  server.use(limiter)
   dotenv.config()
 
   server.use(express.static(Path.resolve('public')))
