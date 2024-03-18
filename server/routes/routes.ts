@@ -8,7 +8,7 @@ import {
   getAllFlashcards,
   updateFlashcard,
 } from '../db/db'
-import { Deck, Flashcard } from '../../models/models'
+import { Deck, Flashcard, NewDeck, newDeckSchema } from '../../models/models'
 
 const router = express.Router()
 
@@ -32,18 +32,12 @@ router.get('/', async (req, res) => {
 router.post('/:deckId', jsonParser, async (req, res) => {
   try {
     const { deck_name, author, flashcards } = req.body
-    const deckFlashcardsData: Deck = {
-      id: Number(req.params.deckId),
-      deck_name: deck_name,
-      author: author,
-      flashcards: flashcards as Flashcard[],
-    }
-
-    const newDeck = {
+    const newDeck: NewDeck = newDeckSchema.parse({
       deck_name,
       author,
-    }
+    })
 
+    // TODO: parse data before calling the db function
     await addNewDeckWithFlashcards(newDeck, flashcards)
 
     res.sendStatus(201)
