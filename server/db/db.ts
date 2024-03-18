@@ -30,8 +30,6 @@ export async function addNewDeckWithFlashcards(
     flashcard_id: flashcardId.id,
   }))
 
-  console.log('junctionData', junctionData)
-
   // Insert the junction data
   await db('joining_table').insert(junctionData)
 }
