@@ -1,58 +1,43 @@
-// Example deck seed:
+import * as z from 'zod'
 
-// {
-//   "deck_name": "example deck",
-//   "author": "Anon",
-//   "flashcards": [
-// 		{"number": 1,
-// 		"question": "hello",
-// 		"answer": "bonjour"},
-// 		{"number": 2,
-// 		"question": "goodbye",
-// 		"answer": "au revoir"},
-// 		{"number": 3,
-// 		"question": "yes",
-// 		"answer": "oui"},
-// 		{"number": 4,
-// 		"question": "no",
-// 		"answer": "non"},
-// 		{"number": 5,
-// 		"question": "thank you",
-// 		"answer": "merci"}
-// 	]
-// }
+export const newFlashcardSchema = z.object({
+  question: z.string(),
+  answer: z.string(),
+})
+export type NewFlashcard = z.infer<typeof newFlashcardSchema>
 
-export interface NewFlashcard {
-  question: string
-  answer: string
-}
+export const flashcardSchema = newFlashcardSchema.extend({
+  id: z.number(),
+  number: z.number(),
+})
+export type Flashcard = z.infer<typeof flashcardSchema>
 
-export interface Flashcard extends NewFlashcard {
-  id: number
-  number: number
-}
+export const flashcardInfoSchema = z.object({
+  deckId: z.number(),
+  flashcardId: z.number(),
+})
+export type FlashcardInfo = z.infer<typeof flashcardInfoSchema>
 
-export interface FlashcardInfo {
-  deckId: number
-  flashcardId: number
-}
+export const flashcardDataSchema = flashcardInfoSchema.extend({
+  number: z.number(),
+  question: z.string(),
+  answer: z.string(),
+})
+export type FlashcardData = z.infer<typeof flashcardDataSchema>
 
-export interface FlashcardData extends FlashcardInfo {
-  number: number
-  question: string
-  answer: string
-}
+export const newDeckSchema = z.object({
+  deck_name: z.string(),
+  author: z.string(),
+})
+export type NewDeck = z.infer<typeof newDeckSchema>
 
-export interface NewDeck {
-  deck_name: string
-  author: string
-}
+export const deckSchema = newDeckSchema.extend({
+  id: z.number(),
+  flashcards: z.array(flashcardSchema),
+})
+export type Deck = z.infer<typeof deckSchema>
 
-export interface Deck extends NewDeck {
-  id: number
-  flashcards: Flashcard[]
-}
-
-export interface AllDecks {
-  decks: Deck[]
-}
+export const allDecksSchema = z.object({
+  decks: z.array(deckSchema),
+})
+export type AllDecks = z.infer<typeof allDecksSchema>
