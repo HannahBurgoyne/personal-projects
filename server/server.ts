@@ -22,9 +22,9 @@ server.use(express.static(Path.join(__dirname, 'public')))
 server.use('/api/v1/flashcardsapp', routes)
 
 if (process.env.NODE_ENV === 'production') {
-  server.use(limiter)
   dotenv.config()
 
+  server.use(limiter)
   server.use(express.static(Path.resolve('public')))
   server.use('/assets', express.static(Path.resolve('./dist/assets')))
   server.get('*', (req, res) => {
